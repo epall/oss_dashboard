@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Blog Update Monitor color demo</title>
+        <style type="text/css">
+            td {
+                width:10em;
+                height:3em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Blog Update Monitor color demo</h1>
+        <table border="1">
+            <% 0.upto 30 do |age| %>
+                <tr>
+                    <td style="<%= color_from_age(age) %>"><%= age %> days old</td>
+                </tr>
+            <% end %>
+        </table>
+    </body>
+</html>

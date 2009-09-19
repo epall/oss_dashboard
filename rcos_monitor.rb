@@ -9,8 +9,6 @@ require 'open-uri'
 require 'feed_detector'
 
 SECONDS_IN_DAY = 60 * 60 * 24
-BLOG_STALE_AGE = 14
-CODE_STALE_AGE = 14
 
 def repo_update(repo_info)
     last_update(repo_info['URL']) if ['github', 'Google Code'].include? repo_info['Type']
@@ -58,6 +56,21 @@ def blog_age(blog_url)
 end
 
 helpers do
+    def color_from_age(days_old)
+        green = red = 0
+        if days_old < 15
+            green = 255
+            red = 255.0*(1.0 - 1.20**-days_old)
+        elsif days_old < 30
+            red = 255
+            green = 255.0*(1.08**(15-days_old))
+        else
+            red = 255
+            green = 80
+        end
+        return 'background-color:#'+sprintf('%02x', red.to_i)+sprintf('%02x', green)+'00;'
+    end
+
     def render_column(col_name, project)
         value = project[col_name]
         return 'No' if value.nil?
@@ -80,7 +93,7 @@ helpers do
         end
     end
     
-    def value_style(col_name, project)
+    def value_class(col_name, project)
         value = project[col_name]
         unless ['Project Name', 'Contributors', 'Website'].include? col_name
             return 'no' if value.nil?
@@ -98,6 +111,16 @@ helpers do
         end
         ''
     end
+
+    def value_style(col_name, project)
+        if col_name == 'Blog'
+            return color_from_age(blog_age(project[col_name]))
+        elsif col_name == 'Source Code' && project['Repo']
+            return color_from_age(repo_age(project['Repo']))
+        else
+            return ''
+        end
+    end
 end
 
 get '/' do
@@ -105,4 +128,8 @@ get '/' do
     @columns = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
     @projects = YAML.load(File.open('projects.yml'))
     erb :index
+end
+
+get '/colordemo' do
+    erb :colordemo
 end
