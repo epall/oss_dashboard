@@ -95,6 +95,7 @@ helpers do
 end
 
 get '/' do
+    headers['Cache-Control'] = 'public, max-age=3600'
     @columns = ['Name', 'Contributors', 'Website', 'Blog', 'Wiki', 'Source Code']
     @projects = YAML.load(File.open('projects.yml'))
     erb :index
