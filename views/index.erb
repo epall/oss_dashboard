@@ -8,6 +8,12 @@
                 padding: 0.75em;
             }
 
+            th p {
+                font-size: small;
+                font-weight: normal;
+                margin: 0px;
+            }
+
             td {
                 padding:0.25em;
                 text-align: center;
@@ -32,14 +38,28 @@
         <table border="1">
             <tr>
                 <% @columns.each do |col| %>
-                    <th><%= col %></th>
+                    <th>
+                    <% if col == "Blog" %>
+                        Blog
+                        <p>
+                        Yellow if not updated<br> in the last <%= BLOG_STALE_AGE %> days
+                        </p>
+                    <% elsif col == "Source Code" %>
+                        Source Code
+                        <p>
+                        Yellow if not updated<br> in the last <%= CODE_STALE_AGE %> days
+                        </p>
+                    <% else %>
+                        <%= col %>
+                    <% end %>
+                    </th>
                 <% end %>
             </tr>
 
             <% @projects.each do |project| %>
                 <tr>
                     <% @columns.each do |col| %>
-                        <td class="<%= value_style(col, project[col]) %>"><%= render_column(col, project[col]) %></td>
+                        <td class="<%= value_style(col, project) %>"><%= render_column(col, project) %></td>
                     <% end %>
                 </tr>
             <% end %>

@@ -6,6 +6,9 @@
     Blog: http://svallens.com/ericontracks/
     Wiki: http://www.getontracks.org/wiki/
     Source Code: http://github.com/epall/tracks/tree/jquery
+    Repo:
+        Type: github
+        URL: http://github.com/epall/tracks/tree/jquery
 -
     Name: Wax PHP Framework
     Contributors:
@@ -14,3 +17,6 @@
     Wiki: http://code.google.com/p/waxphp/w/list
     Source Code: http://code.google.com/p/waxphp/source/checkout
     Website: http://code.google.com/p/waxphp/
+    Repo:
+        Type: Google Code
+        URL: http://code.google.com/p/waxphp/source/list
