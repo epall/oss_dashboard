@@ -1,1 +1,44 @@
-Hello, world! From ERB.
+<html>
+    <head>
+        <title>RCOS Project Monitor</title>
+        <style type="text/css">
+            th {
+                font-weight: bold;
+                font-size: large;
+                padding: 0.75em;
+            }
+
+            td {
+                padding:0.25em;
+                text-align: center;
+            }
+
+            td.no {
+                background-color: red;
+            }
+
+            td.yes {
+                background-color: #3F3;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>RCOS Project Monitor</h1>
+        <%= @foo %>
+        <table border="1">
+            <tr>
+                <% @columns.each do |col| %>
+                    <th><%= col %></th>
+                <% end %>
+            </tr>
+
+            <% @projects.each do |project| %>
+                <tr>
+                    <% @columns.each do |col| %>
+                        <td class="<%= value_style(col, project[col]) %>"><%= render_column(col, project[col]) %></td>
+                    <% end %>
+                </tr>
+            <% end %>
+        </table>
+    </body>
+</html>
