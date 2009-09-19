@@ -1,5 +1,5 @@
 -
-    Name: Tracks
+    Project Name: Tracks
     Contributors:
         - Eric Allen
     Website: http://getontracks.org/
@@ -10,7 +10,7 @@
         Type: github
         URL: http://github.com/epall/tracks/tree/jquery
 -
-    Name: Wax PHP Framework
+    Project Name: Wax PHP Framework
     Contributors:
         - Joe Chrzanowski
     Blog: http://waxphp.blogspot.com/
