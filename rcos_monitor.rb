@@ -3,7 +3,8 @@
 
 require 'rubygems'
 require 'sinatra'
+require 'erb'
 
 get '/' do
-    'Hello, world!'
+    erb :index
 end
