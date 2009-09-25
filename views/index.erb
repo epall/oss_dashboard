@@ -33,7 +33,7 @@
         <%= @foo %>
         <table border="1">
             <tr>
-                <% @columns.each do |col| %>
+                <% COLUMNS.each do |col| %>
                     <th>
                         <%= col %>
                     </th>
@@ -42,7 +42,7 @@
 
             <% @projects.each do |project| %>
                 <tr>
-                    <% @columns.each do |col| %>
+                    <% COLUMNS.each do |col| %>
                         <td class="<%= value_class(col, project) %>" style="<%= value_style(col, project)%>"><%= render_column(col, project) %></td>
                     <% end %>
                 </tr>

@@ -9,11 +9,46 @@ require 'open-uri'
 require 'feed_detector'
 
 SECONDS_IN_DAY = 60 * 60 * 24
+COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
 
+# Fetch an RSS/Atom feed from a blog URL. Automatically detects the feed link
+# using FeedDetector and caches results for duration of this HTTP request.
+def fetch_blog(blog_url)
+    @blog_cache ||= {}
+    rss = @blog_cache[blog_url]
+    unless rss
+        puts "fetching #{blog_url}"
+        feed_url = FeedDetector.fetch_feed_url(blog_url)
+        rss = SimpleRSS.parse open(feed_url)
+        @blog_cache[blog_url] = rss
+    end
+    return rss
+end
+
+# Get the date of the last update to the given blog in the format mm/dd
+def last_update(blog_url)
+    published = fetch_blog(blog_url).entries.first.updated
+    published ||= fetch_blog(blog_url).entries.first.published
+    published.strftime('%m/%d')
+end
+
+# Get the age of the last update to the given blog in days. Returns a
+# floating point value.
+def blog_age(blog_url)
+    published = fetch_blog(blog_url).entries.first.updated
+    published ||= fetch_blog(blog_url).entries.first.published
+    age = Time.now - published
+    days_old = (age / SECONDS_IN_DAY)
+    return days_old
+end
+
+# Gets date of last update to repository or nil if it's not a known type
 def repo_update(repo_info)
     last_update(repo_info['URL']) if ['github', 'Google Code'].include? repo_info['Type']
 end
 
+# Gets age of last update to repository in days. Throws an exception if
+# repository is of an unknown type.
 def repo_age(repo_info)
     case(repo_info['Type'])
     when 'github' then blog_age(repo_info['URL'])
@@ -22,6 +57,8 @@ def repo_age(repo_info)
     end
 end
 
+# Render the source code column of the display, including links to the code
+# and date of last update.
 def render_source_code(project)
     return "<a href=\"#{project['Source Code']}\">Yes</a>" unless project['Repo']
     if ['github', 'Google Code'].include? project['Repo']['Type']
@@ -30,29 +67,25 @@ def render_source_code(project)
     end
 end
 
-def fetch_blog(blog_url)
-    @blog_cache ||= {}
-    rss = @blog_cache[blog_url]
-    unless rss
-        feed_url = FeedDetector.fetch_feed_url(blog_url)
-        rss = SimpleRSS.parse open(feed_url)
-        @blog_cache[blog_url] = rss
+# Given an array of projects, rank them from most recently updated to least
+# recently updated.
+def rank_by_age(projects)
+    projects.sort_by do |project|
+        score = 0
+        score += 1000 unless project['Source Code']
+        score += 1000 unless project['Blog']
+        score += 1000 unless project['Wiki']
+        if project['Repo']
+            if project['Blog']
+                score += [repo_age(project['Repo']), blog_age(project['Blog'])].min
+            else
+                score += repo_age(project['Repo'])
+            end
+        elsif project['Blog']
+            score += blog_age(project['Blog'])
+        end
+        score
     end
-    return rss
-end
-
-def last_update(blog_url)
-    published = fetch_blog(blog_url).entries.first.published
-    published ||= fetch_blog(blog_url).entries.first.updated 
-    published.strftime('%m/%d')
-end
-
-def blog_age(blog_url)
-    published = fetch_blog(blog_url).entries.first.published
-    published ||= fetch_blog(blog_url).entries.first.updated 
-    age = Time.now - published
-    days_old = (age / SECONDS_IN_DAY)
-    return days_old
 end
 
 helpers do
@@ -87,7 +120,7 @@ helpers do
         elsif value.is_a? String and value.match(/http/)
             "<a href=\"#{value}\">Yes</a>"
         elsif value.is_a? Array
-            value.join('\n<br>\n')
+            value.join("\n<br>\n")
         else
             value
         end
@@ -98,10 +131,10 @@ helpers do
         unless ['Project Name', 'Contributors', 'Website'].include? col_name
             return 'no' if value.nil?
             if col_name == 'Blog'
-                return blog_age(value) > BLOG_STALE_AGE ? 'stale' : 'yes'
+                return ''
             elsif col_name == 'Source Code'
                 if project['Repo']
-                    return repo_age(project['Repo']) > CODE_STALE_AGE ? 'stale' : 'yes'
+                    return ''
                 else
                     return 'yes'
                 end
@@ -113,7 +146,7 @@ helpers do
     end
 
     def value_style(col_name, project)
-        if col_name == 'Blog'
+        if col_name == 'Blog' && project['Blog']
             return color_from_age(blog_age(project[col_name]))
         elsif col_name == 'Source Code' && project['Repo']
             return color_from_age(repo_age(project['Repo']))
@@ -124,9 +157,8 @@ helpers do
 end
 
 get '/' do
-    headers['Cache-Control'] = 'public, max-age=3600'
-    @columns = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
-    @projects = YAML.load(File.open('projects.yml'))
+    headers['Cache-Control'] = "public, max-age=#{60 * 60 * 6}"
+    @projects = rank_by_age(YAML.load(File.open('projects.yml')))
     erb :index
 end
 
