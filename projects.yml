@@ -20,3 +20,34 @@
     Repo:
         Type: Google Code
         URL: http://code.google.com/p/waxphp/source/list
+-
+    Project Name: SocialGeo
+    Contributors:
+        - Zach Alberico
+        - Joe Chrzanowski
+        - Nate Stedman
+-
+    Project Name: SLiK
+    Contributors:
+        - James Kolb
+        - Beau Breedlove
+-
+    Project Name: Non-Contact Heartbeat Detection Software
+    Contributors:
+        - Sean Austin
+        - Diana Mazzola
+        - Griffin Milsap
+-
+    Project Name: Zest Test
+    Contributors:
+        - Zeke Dean
+        - Robin Senseney
+        - Nicole Wardle
+-
+    Project Name: GNOME Contact Management
+    Contributors:
+        - Tim Horton
+-
+    Project Name: ContextKit
+    Contributors:
+        - Rob Carr
