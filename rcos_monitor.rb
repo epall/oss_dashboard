@@ -25,18 +25,26 @@ def fetch_blog(blog_url)
     return rss
 end
 
+# different blog engines use different RSS fields to specifiy when an entry
+# was published. This method evens that all out so you always get a DateTime
+# for when the most recent entry was updated.
+def publish_time(blog_url)
+    entry = fetch_blog(blog_url).entries.first
+    return nil if entry.nil?
+    return entry.updated || entry.published || entry.pubDate
+end
+
 # Get the date of the last update to the given blog in the format mm/dd
 def last_update(blog_url)
-    published = fetch_blog(blog_url).entries.first.updated
-    published ||= fetch_blog(blog_url).entries.first.published
+    published = publish_time(blog_url)
     published.strftime('%m/%d')
 end
 
 # Get the age of the last update to the given blog in days. Returns a
 # floating point value.
 def blog_age(blog_url)
-    published = fetch_blog(blog_url).entries.first.updated
-    published ||= fetch_blog(blog_url).entries.first.published
+    published = publish_time(blog_url)
+    return 1000 unless published
     age = Time.now - published
     days_old = (age / SECONDS_IN_DAY)
     return days_old
@@ -44,7 +52,7 @@ end
 
 # Gets date of last update to repository or nil if it's not a known type
 def repo_update(repo_info)
-    last_update(repo_info['URL']) if ['github', 'Google Code'].include? repo_info['Type']
+    last_update(repo_info['URL']) if ['github', 'Google Code', 'bitbucket'].include? repo_info['Type']
 end
 
 # Gets age of last update to repository in days. Throws an exception if
@@ -53,6 +61,7 @@ def repo_age(repo_info)
     case(repo_info['Type'])
     when 'github' then blog_age(repo_info['URL'])
     when 'Google Code' then blog_age(repo_info['URL'])
+    when 'bitbucket' then blog_age(repo_info['URL'])
     else raise "Repository type not supported: #{repo_info['Type']}"
     end
 end
