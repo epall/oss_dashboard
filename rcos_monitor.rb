@@ -171,6 +171,6 @@ get '/' do
     erb :index
 end
 
-get '/colordemo' do
+get '/key' do
     erb :colordemo
 end

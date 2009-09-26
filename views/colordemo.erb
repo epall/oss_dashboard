@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Blog Update Monitor color demo</title>
+        <title>RCOS Dashboard color key</title>
         <style type="text/css">
             td {
                 width:10em;
@@ -9,13 +9,19 @@
         </style>
     </head>
     <body>
-        <h1>Blog Update Monitor color demo</h1>
+        <h1>RCOS Dashboard color key</h1>
+        <p>
+            <a href="/">Home</a>
+        </p>
         <table border="1">
             <% 0.upto 30 do |age| %>
                 <tr>
                     <td style="<%= color_from_age(age) %>"><%= age %> days old</td>
                 </tr>
             <% end %>
+            <tr>
+                <td style="<%= color_from_age(30) %>">&gt; 30 days old</td>
+            </tr>
         </table>
     </body>
 </html>
