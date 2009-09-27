@@ -1,4 +1,19 @@
 -
+    Project Name: Clutter Haskell Bindings
+    Contributors:
+        - Matt Arsenault
+    Blog: http://www.whatmannerofburgeristhis.com/
+    Source Code: http://jayne.hortont.com/git/cgit.cgi/clutterhs/
+    Repo:
+        Type: cgit
+        URL: http://jayne.hortont.com/git/cgit.cgi/clutterhs/
+-
+    Project Name: GNOME Contact Management
+    Contributors:
+        - Tim Horton
+    Blog: http://www.hortont.com/blog/
+    Presentation 1: http://groups.google.com/group/rcos-f09/web/IntroPresentation.pdf
+-
     Project Name: Tracks
     Contributors:
         - Eric Allen
@@ -46,10 +61,6 @@
         - Robin Senseney
         - Nicole Wardle
 -
-    Project Name: GNOME Contact Management
-    Contributors:
-        - Tim Horton
--
     Project Name: ContextKit
     Contributors:
         - Rob Carr
@@ -62,3 +73,46 @@
     Repo:
         Type: bitbucket
         URL: http://bitbucket.org/lloyda2/pokestruct/rss/
+-
+    Project Name: Firmant
+    Website: http://firmant.org/
+    Contributors:
+        - Robert Escriva
+    Source Code: git://firmant.org/firmant.git
+    Blog:
+        Web: http://firmant.org/
+        Feed: http://firmant.org/atom/
+    Repo:
+        Type: git
+        URL: git://firmant.org/firmant.git
+-
+    Project Name: Distributed Mirror System
+    Contributors:
+        - Robert Escriva
+        - Joseph Werther
+    Website: http://projects.robescriva.com/projects/show/p2p-mirror
+    Blog: http://projects.robescriva.com/projects/p2p-mirror/news
+-
+    Project Name: Cankids Donation Sytem
+    Contributors:
+        - Lixun Liu
+        - Patrick Wong
+    Website: http://code.google.com/p/ngodb/
+    Blog: http://ngodb.blogspot.com/
+    Source Code: http://code.google.com/p/ngodb/source/checkout
+    Repo:
+        Type: Google Code
+        URL: http://code.google.com/p/ngodb/source/list
+-
+    Project Name: RPInventory
+    Contributors:
+        - Cameron Fackler
+        - Josh Elser
+        - Colin Sullivan
+    Website: http://rpinventory.com/
+    Wiki: http://rpinventory.com/
+    Blog: http://rpinventory.com/projects/rpinventory/news
+    Source Code: http://rpinventory.com/repositories/show/rpinventory
+    Repo:
+        Type: Redmine
+        URL: http://rpinventory.com/repositories/show/rpinventory

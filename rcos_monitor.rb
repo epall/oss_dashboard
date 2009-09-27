@@ -10,14 +10,15 @@ require 'feed_detector'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
+RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine']
 
 # Fetch an RSS/Atom feed from a blog URL. Automatically detects the feed link
 # using FeedDetector and caches results for duration of this HTTP request.
 def fetch_blog(blog_url)
+    blog_url = blog_url['Feed'] unless blog_url.is_a? String
     @blog_cache ||= {}
     rss = @blog_cache[blog_url]
     unless rss
-        puts "fetching #{blog_url}"
         feed_url = FeedDetector.fetch_feed_url(blog_url)
         rss = SimpleRSS.parse open(feed_url)
         @blog_cache[blog_url] = rss
@@ -37,6 +38,7 @@ end
 # Get the date of the last update to the given blog in the format mm/dd
 def last_update(blog_url)
     published = publish_time(blog_url)
+    return 'No updates' if published.nil?
     published.strftime('%m/%d')
 end
 
@@ -52,17 +54,18 @@ end
 
 # Gets date of last update to repository or nil if it's not a known type
 def repo_update(repo_info)
-    last_update(repo_info['URL']) if ['github', 'Google Code', 'bitbucket'].include? repo_info['Type']
+    last_update(repo_info['URL']) if RSS_ENABLED_REPOSITORIES.include? repo_info['Type']
 end
 
 # Gets age of last update to repository in days. Throws an exception if
 # repository is of an unknown type.
 def repo_age(repo_info)
-    case(repo_info['Type'])
-    when 'github' then blog_age(repo_info['URL'])
-    when 'Google Code' then blog_age(repo_info['URL'])
-    when 'bitbucket' then blog_age(repo_info['URL'])
-    else raise "Repository type not supported: #{repo_info['Type']}"
+    if RSS_ENABLED_REPOSITORIES.include? repo_info['Type']
+        blog_age(repo_info['URL'])
+    elsif repo_info['Type'] == 'git'
+        return 100
+    else
+        raise "Repository type not supported: #{repo_info['Type']}"
     end
 end
 
@@ -70,9 +73,12 @@ end
 # and date of last update.
 def render_source_code(project)
     return "<a href=\"#{project['Source Code']}\">Yes</a>" unless project['Repo']
-    if ['github', 'Google Code'].include? project['Repo']['Type']
+    if RSS_ENABLED_REPOSITORIES.include? project['Repo']['Type']
         "<a href=\"#{project['Source Code']}\">#{project['Repo']['Type']}</a> (#{repo_update(project['Repo'])})"
-    else "<a href=\"#{project['Source Code']}\">Yes</a>"
+    elsif project['Repo']['Type'] == 'git'
+        "<a href=\"#{project['Source Code']}\">git</a> (Unavailable)"
+    else
+        "<a href=\"#{project['Source Code']}\">Yes</a>"
     end
 end
 
@@ -117,7 +123,11 @@ helpers do
         value = project[col_name]
         return 'No' if value.nil?
         if col_name == 'Blog'
-            "<a href=\"#{value}\">Yes</a> (#{last_update(value)})"
+            if value.is_a? String
+                "<a href=\"#{value}\">Yes</a> (#{last_update(value)})"
+            else
+                "<a href=\"#{value['Web']}\">Yes</a> (#{last_update(value)})"
+            end
         elsif col_name == 'Source Code'
             render_source_code(project)
         elsif col_name == 'Project Name'
