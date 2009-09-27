@@ -49,11 +49,16 @@
         - James Kolb
         - Beau Breedlove
 -
-    Project Name: Non-Contact Heartbeat Detection Software
+    Project Name: MCG Project
+    Blog: http://rcosmcg.blogspot.com/
     Contributors:
         - Sean Austin
         - Diana Mazzola
         - Griffin Milsap
+    Source Code: http://code.google.com/p/rcosmcg/
+    Repo:
+        Type: Google Code
+        URL: http://code.google.com/p/rcosmcg/source/list
 -
     Project Name: Zest Test
     Contributors:
@@ -78,19 +83,20 @@
     Website: http://firmant.org/
     Contributors:
         - Robert Escriva
-    Source Code: git://firmant.org/firmant.git
     Blog:
         Web: http://firmant.org/
         Feed: http://firmant.org/atom/
+    Source Code: http://projects.robescriva.com/repositories/show/firmant
     Repo:
-        Type: git
-        URL: git://firmant.org/firmant.git
+        Type: Redmine
+        URL: http://projects.robescriva.com/repositories/show/firmant
 -
     Project Name: Distributed Mirror System
     Contributors:
         - Robert Escriva
         - Joseph Werther
     Website: http://projects.robescriva.com/projects/show/p2p-mirror
+    Wiki: http://projects.robescriva.com/wiki/p2p-mirror
     Blog: http://projects.robescriva.com/projects/p2p-mirror/news
 -
     Project Name: Cankids Donation Sytem

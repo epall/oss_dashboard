@@ -20,7 +20,9 @@ def fetch_blog(blog_url)
     rss = @blog_cache[blog_url]
     unless rss
         feed_url = FeedDetector.fetch_feed_url(blog_url)
+        puts "fetching #{feed_url}"
         rss = SimpleRSS.parse open(feed_url)
+        puts "Done fetching & parsing"
         @blog_cache[blog_url] = rss
     end
     return rss
