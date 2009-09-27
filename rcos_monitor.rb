@@ -46,7 +46,7 @@ end
 # floating point value.
 def blog_age(blog_url)
     published = publish_time(blog_url)
-    return 1000 unless published
+    return 100 unless published
     age = Time.now - published
     days_old = (age / SECONDS_IN_DAY)
     return days_old
