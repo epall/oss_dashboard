@@ -98,6 +98,7 @@
         - Lixun Liu
         - Patrick Wong
     Website: http://code.google.com/p/ngodb/
+    Wiki: http://code.google.com/p/ngodb/w/list
     Blog: http://ngodb.blogspot.com/
     Source Code: http://code.google.com/p/ngodb/source/checkout
     Repo:
@@ -116,3 +117,20 @@
     Repo:
         Type: Redmine
         URL: http://rpinventory.com/repositories/show/rpinventory
+-
+    Project Name: Re-targettable Decompiler
+    Contributors:
+        - John McMaster
+        - Alex Radocea
+-
+    Project Name: DP Learning Management System
+    Contributors:
+        - Ryan Leary
+-
+    Project Name: RFID-based computing environment
+    Contributors:
+        - Peter Hajas
+-
+    Project Name: Voting Box
+    Contributors:
+        - Joe Dougherty
