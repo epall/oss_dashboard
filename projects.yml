@@ -124,10 +124,15 @@
         Type: Redmine
         URL: http://rpinventory.com/repositories/show/rpinventory
 -
-    Project Name: Re-targettable Decompiler
+    Project Name: Universal Decompiler
     Contributors:
         - John McMaster
         - Alex Radocea
+    Blog: http://uvudec.blogspot.com/
+    Source Code: http://github.com/uvudec/uvudec/
+    Repo:
+        Type: github
+        URL: http://github.com/uvudec/uvudec/
 -
     Project Name: DP Learning Management System
     Contributors:
@@ -140,3 +145,13 @@
     Project Name: Voting Box
     Contributors:
         - Joe Dougherty
+-
+    Project Name: Diagnostic Viewer for Trac    
+    Contributors:
+        - Ryan Govostes
+    Blog: http://rpisec.net/projects/trac-analysis/news
+    Website: http://rpisec.net/projects/show/trac-analysis
+    Source Code: http://rpisec.net/repositories/show/trac-analysis
+    Repo:
+        Type: Redmine
+        URL: http://rpisec.net/repositories/show/trac-analysis
