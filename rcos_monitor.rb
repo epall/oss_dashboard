@@ -32,9 +32,14 @@ end
 # was published. This method evens that all out so you always get a DateTime
 # for when the most recent entry was updated.
 def publish_time(blog_url)
-    entry = fetch_blog(blog_url).entries.first
-    return nil if entry.nil?
-    return entry.updated || entry.published || entry.pubDate
+    begin
+        entry = fetch_blog(blog_url).entries.first
+        return nil if entry.nil?
+        return entry.updated || entry.published || entry.pubDate
+    rescue
+        puts $!
+        return nil
+    end
 end
 
 # Get the date of the last update to the given blog in the format mm/dd
