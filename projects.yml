@@ -13,6 +13,10 @@
         - Tim Horton
     Blog: http://www.hortont.com/blog/
     Presentation 1: http://groups.google.com/group/rcos-f09/web/IntroPresentation.pdf
+    Source Code: http://jayne.hortont.com/git/cgit.cgi/sheeple.git/
+    Repo:
+        Type: cgit
+        URL: http://jayne.hortont.com/git/cgit.cgi/sheeple.git/
 -
     Project Name: Tracks
     Contributors:
@@ -67,12 +71,18 @@
         - Nicole Wardle
 -
     Project Name: ContextKit
+    Blog: http://blogs.gnome.org/~racarr
+    Wiki: http://live.gnome.org/ContextKit
+    Source Code: http://git.gnome.org/cgit/ContextKit
     Contributors:
         - Rob Carr
+    Repo:
+        Type: GNOME
 -
     Project Name: Pok&#233;struct
     Contributors:
         - Adam Lloyd
+    Blog: http://pokestruct.tumblr.com/
     Source Code: http://bitbucket.org/lloyda2/pokestruct/src/
     Wiki: http://bitbucket.org/lloyda2/pokestruct/wiki/Home
     Repo:

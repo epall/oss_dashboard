@@ -7,6 +7,7 @@ require 'erb'
 require 'simple-rss'
 require 'open-uri'
 require 'feed_detector'
+require 'yaml'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
@@ -69,7 +70,7 @@ end
 def repo_age(repo_info)
     if RSS_ENABLED_REPOSITORIES.include? repo_info['Type']
         blog_age(repo_info['URL'])
-    elsif repo_info['Type'] == 'git'
+    elsif repo_info['Type'] == 'git' || repo_info['Type'] == 'GNOME'
         return 100
     else
         raise "Repository type not supported: #{repo_info['Type']}"
