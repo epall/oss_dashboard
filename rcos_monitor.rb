@@ -8,6 +8,7 @@ require 'simple-rss'
 require 'open-uri'
 require 'feed_detector'
 require 'yaml'
+require 'timeout'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
@@ -18,9 +19,19 @@ RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmi
 def fetch_blog(blog_url)
     blog_url = blog_url['Feed'] unless blog_url.is_a? String
     @blog_cache ||= {}
+    @blog_fail ||= []
     rss = @blog_cache[blog_url]
-    unless rss
-        feed_url = FeedDetector.fetch_feed_url(blog_url)
+    unless rss || @blog_fail.include?(blog_url)
+        feed_url = nil
+        begin
+            Timeout::timeout(8) do
+                feed_url = FeedDetector.fetch_feed_url(blog_url)
+            end
+        rescue Timeout::Error
+            @blog_fail << blog_url
+            puts "FEED FAIL: #{blog_url}"
+            return nil
+        end
         puts "fetching #{feed_url}"
         rss = SimpleRSS.parse open(feed_url)
         puts "Done fetching & parsing"
