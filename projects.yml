@@ -71,7 +71,7 @@
         - Nicole Wardle
 -
     Project Name: ContextKit
-    Blog: http://blogs.gnome.org/~racarr
+    #Blog: http://blogs.gnome.org/~racarr
     Wiki: http://live.gnome.org/ContextKit
     Source Code: http://git.gnome.org/cgit/ContextKit
     Contributors:
@@ -167,4 +167,30 @@
     Repo:
         Type: Redmine
         URL: http://rpisec.net/repositories/show/trac-analysis
-
+-
+    Project Name: Fedora Kontributor
+    Contributors:
+        - Ben Boeckel
+-
+    Project Name: goffe
+    Contributors:
+        - Bryan Yudkin
+    Blog: http://rcos-goffe.blogspot.com/
+    Source Code: http://code.google.com/p/goffe/
+    Repo:
+        Type: Google Code
+        URL: http://code.google.com/p/goffe/source/list
+-
+    Project Name: Math game for OLPC
+    Contributors:
+        - Priti Kumar
+        - Peter Wakefield
+    Blog: http://matholpc.blogspot.com/
+-
+    Project Name: MyFRCOP
+    Contributors:
+        - UNKNOWN (presentation FAIL)
+-
+    Project Name: Gmail Adventures
+    Contributors:
+        - Jeremy Therrien
