@@ -175,6 +175,7 @@
     Project Name: goffe
     Contributors:
         - Bryan Yudkin
+        - Peter Healy
     Blog: http://rcos-goffe.blogspot.com/
     Source Code: http://code.google.com/p/goffe/
     Repo:
@@ -194,3 +195,8 @@
     Project Name: Gmail Adventures
     Contributors:
         - Jeremy Therrien
+-
+    Project Name: RPI Grade Tracker
+    Contributors:
+        - Chris Brown
+        - Rob Margolies
