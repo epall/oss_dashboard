@@ -14,7 +14,7 @@ require 'activerecord'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
-RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine']
+RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine', 'Trac']
 
  
 dbconfig = YAML.load(File.read('config/database.yml'))

@@ -52,6 +52,8 @@
     Contributors:
         - James Kolb
         - Beau Breedlove
+    Blog: http://sliksurface.blogspot.com/
+    Wiki: http://sliksurface.wikispaces.com/
 -
     Project Name: MCG Project
     Blog: http://rcosmcg.blogspot.com/
@@ -171,6 +173,12 @@
     Project Name: Fedora Kontributor
     Contributors:
         - Ben Boeckel
+    Wiki: https://fedorahosted.org/fedora-kontributor/
+    Blog: http://benboeckel.net/blog/
+    Source Code: https://fedorahosted.org/fedora-kontributor/browser
+    Repo:
+        Type: Trac
+        URL: 'https://fedorahosted.org/fedora-kontributor/timeline?from=10%2F06%2F09&daysback=30&changeset=on&update=Update'
 -
     Project Name: goffe
     Contributors:
