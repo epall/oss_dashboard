@@ -10,14 +10,28 @@ require 'feed_detector'
 require 'yaml'
 require 'timeout'
 require 'feedzirra'
+require 'activerecord'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
 RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine']
 
+ 
+dbconfig = YAML.load(File.read('config/database.yml'))
+ActiveRecord::Base.establish_connection dbconfig['production']
+
+class BlogToRss < ActiveRecord::Base
+        set_table_name "blog_to_rss"
+end
+
 def get_feed_url(blog_url)
-        @feed_urls ||= {}
-        return @feed_urls[blog_url] || (@feed_urls[blog_url] = FeedDetector.fetch_feed_url(blog_url))
+        db_cache = BlogToRss.find(:first, :conditions => {:blog_url => blog_url})
+        return db_cache.feed_url if db_cache
+
+        puts "Initializing feed url for #{blog_url}"
+        feed_url = FeedDetector.fetch_feed_url(blog_url)
+        BlogToRss.create(:blog_url => blog_url, :feed_url => feed_url).save!
+        return feed_url
 end
         
 
@@ -31,10 +45,7 @@ def fetch_all_blogs(projects)
             end
 
     end.reject{|u| u.nil?}
-    puts urls.join("\n")
-    puts "Feedzirra GO"
     @feed_cache = Feedzirra::Feed.fetch_and_parse(urls)
-    puts "Feedzirra DONE"
 end
 
 # Fetch an RSS/Atom feed from a blog URL. Automatically detects the feed link
