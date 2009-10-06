@@ -9,10 +9,33 @@ require 'open-uri'
 require 'feed_detector'
 require 'yaml'
 require 'timeout'
+require 'feedzirra'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
 RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine']
+
+def get_feed_url(blog_url)
+        @feed_urls ||= {}
+        return @feed_urls[blog_url] || (@feed_urls[blog_url] = FeedDetector.fetch_feed_url(blog_url))
+end
+        
+
+def fetch_all_blogs(projects)
+    urls = projects.reject{|p| p['Blog'].nil?}.map{|p| p['Blog'].is_a?(String) ? p['Blog'] : p['Blog']['Feed']}.map{|u| get_feed_url(u)}
+    urls += projects.map do |project|
+            if project['Repo'] && RSS_ENABLED_REPOSITORIES.include?(project['Repo']['Type'])
+                    get_feed_url(project['Repo']['URL'])
+            else
+                    nil
+            end
+
+    end.reject{|u| u.nil?}
+    puts urls.join("\n")
+    puts "Feedzirra GO"
+    @feed_cache = Feedzirra::Feed.fetch_and_parse(urls)
+    puts "Feedzirra DONE"
+end
 
 # Fetch an RSS/Atom feed from a blog URL. Automatically detects the feed link
 # using FeedDetector and caches results for duration of this HTTP request.
@@ -21,11 +44,12 @@ def fetch_blog(blog_url)
     @blog_cache ||= {}
     @blog_fail ||= []
     rss = @blog_cache[blog_url]
+    rss ||= @feed_cache[get_feed_url(blog_url)]
     unless rss || @blog_fail.include?(blog_url)
         feed_url = nil
         begin
             Timeout::timeout(8) do
-                feed_url = FeedDetector.fetch_feed_url(blog_url)
+                feed_url = get_feed_url(blog_url)
             end
         rescue Timeout::Error
             @blog_fail << blog_url
@@ -196,7 +220,9 @@ end
 
 get '/' do
     headers['Cache-Control'] = "public, max-age=#{60 * 60 * 6}"
-    @projects = rank_by_age(YAML.load(File.open('projects.yml')))
+    raw_projects = YAML.load(File.open('projects.yml'))
+    fetch_all_blogs(raw_projects)
+    @projects = rank_by_age(raw_projects)
     erb :index
 end
 
