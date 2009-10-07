@@ -24,6 +24,9 @@ class BlogToRss < ActiveRecord::Base
         set_table_name "blog_to_rss"
 end
 
+class BlogFailError < StandardError
+end
+
 def get_feed_url(blog_url)
         db_cache = BlogToRss.find(:first, :conditions => {:blog_url => blog_url})
         return db_cache.feed_url if db_cache
@@ -33,7 +36,6 @@ def get_feed_url(blog_url)
         BlogToRss.create(:blog_url => blog_url, :feed_url => feed_url).save!
         return feed_url
 end
-        
 
 def fetch_all_blogs(projects)
     urls = projects.reject{|p| p['Blog'].nil?}.map{|p| p['Blog'].is_a?(String) ? p['Blog'] : p['Blog']['Feed']}.map{|u| get_feed_url(u)}
@@ -45,34 +47,21 @@ def fetch_all_blogs(projects)
             end
 
     end.reject{|u| u.nil?}
-    @feed_cache = Feedzirra::Feed.fetch_and_parse(urls)
+    puts "Feedzirra GO"
+    @feed_cache = Feedzirra::Feed.fetch_and_parse(urls, {:timeout => 20})
+    puts "Feedzirra DONE"
 end
 
 # Fetch an RSS/Atom feed from a blog URL. Automatically detects the feed link
 # using FeedDetector and caches results for duration of this HTTP request.
 def fetch_blog(blog_url)
     blog_url = blog_url['Feed'] unless blog_url.is_a? String
-    @blog_cache ||= {}
-    @blog_fail ||= []
-    rss = @blog_cache[blog_url]
-    rss ||= @feed_cache[get_feed_url(blog_url)]
-    unless rss || @blog_fail.include?(blog_url)
-        feed_url = nil
-        begin
-            Timeout::timeout(8) do
-                feed_url = get_feed_url(blog_url)
-            end
-        rescue Timeout::Error
-            @blog_fail << blog_url
-            puts "FEED FAIL: #{blog_url}"
-            return nil
-        end
-        puts "fetching #{feed_url}"
-        rss = SimpleRSS.parse open(feed_url)
-        puts "Done fetching & parsing"
-        @blog_cache[blog_url] = rss
+    feed = @feed_cache[get_feed_url(blog_url)]
+    if feed.is_a? Fixnum
+        raise BlogFailError, blog_url
+    else
+        return feed
     end
-    return rss
 end
 
 # different blog engines use different RSS fields to specifiy when an entry
@@ -83,23 +72,29 @@ def publish_time(blog_url)
         entry = fetch_blog(blog_url).entries.first
         return nil if entry.nil?
         return entry.updated || entry.published || entry.pubDate
-    rescue
-        puts $!
-        return nil
     end
 end
 
 # Get the date of the last update to the given blog in the format mm/dd
 def last_update(blog_url)
-    published = publish_time(blog_url)
-    return 'No updates' if published.nil?
-    published.strftime('%m/%d')
+    begin
+        published = publish_time(blog_url)
+        return 'No updates' if published.nil?
+        return published.strftime('%m/%d')
+    rescue BlogFailError
+        return 'Down or slow'
+    end
 end
 
 # Get the age of the last update to the given blog in days. Returns a
 # floating point value.
 def blog_age(blog_url)
-    published = publish_time(blog_url)
+    published = nil
+    begin
+        published = publish_time(blog_url)
+    rescue BlogFailError
+        return 100
+    end
     return 100 unless published
     age = Time.now - published
     days_old = (age / SECONDS_IN_DAY)
