@@ -171,6 +171,7 @@
     Blog: http://rpisec.net/projects/trac-analysis/news
     Website: http://rpisec.net/projects/show/trac-analysis
     Source Code: http://rpisec.net/repositories/show/trac-analysis
+    Wiki: http://rpisec.net/wiki/trac-analysis
     Repo:
         Type: Redmine
         URL: http://rpisec.net/repositories/show/trac-analysis
@@ -191,6 +192,7 @@
         - Peter Healy
     Blog: http://rcos-goffe.blogspot.com/
     Source Code: http://code.google.com/p/goffe/
+    Wiki: http://code.google.com/p/goffe/w/list
     Repo:
         Type: Google Code
         URL: http://code.google.com/p/goffe/source/list
@@ -203,7 +205,7 @@
 -
     Project Name: MyFRCOP
     Contributors:
-        - UNKNOWN (presentation FAIL)
+        - Anonymous?
 -
     Project Name: Gmail Adventures
     Contributors:
@@ -213,3 +215,24 @@
     Contributors:
         - Chris Brown
         - Rob Margolies
+-
+    Project Name: Bonsai
+    Contributors:
+        - Brian Michalski
+    Blog: http://vms.brispace.net/
+    Wiki: http://wiki.github.com/bamnet/bonsai-video
+    Website: http://github.com/bamnet/bonsai-video
+    Source Code: http://github.com/bamnet/bonsai-video
+    Repo:
+        Type: github
+        URL: http://github.com/bamnet/bonsai-video
+-
+    Project Name: iRPI
+    Contributors:
+        - Devin Ross
+    Website: http://devinsheaven.com/irpi/
+    Source Code: http://github.com/tapku/iRPI/tree
+    Wiki: http://wiki.github.com/tapku/iRPI
+    Repo:
+        Type: github
+        URL: http://wiki.github.com/tapku/iRPI
