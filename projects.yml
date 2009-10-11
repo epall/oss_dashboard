@@ -161,9 +161,14 @@
         - Aileen Sheedy
         - "Michael O'Keefe"
 -
-    Project Name: Voting Box
+    Project Name: Votebox
     Contributors:
-        - Joe Dougherty
+        - Joseph Dougherty
+        - Matthew Heffler
+    Website: http://votebox.us/
+    Blog:
+        Web: 'http://votebox.us/index.php?f=Blog'
+        Feed: 'http://votebox.us/rss.php?f=Blog'
 -
     Project Name: Diagnostic Viewer for Trac    
     Contributors:
