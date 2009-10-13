@@ -5,13 +5,10 @@
             th {
                 font-weight: bold;
                 font-size: large;
-                padding: 0.75em;
-            }
-
-            th p {
-                font-size: small;
-                font-weight: normal;
-                margin: 0px;
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                padding-top: 5px;
+                padding-bottom: 5px;
             }
 
             td {
@@ -31,7 +28,6 @@
     <body>
         <h1>RCOS Dashboard</h1>
         <p>Welcome to the RCOS Dashboard. Below is a listing of all of the known <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects during the Fall 2009 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet. To see the relationship between age and color, see the <a href="/key">key</a>.</p>
-        <p>Due to the significant time required to fetch the RSS feeds for all of these projects, this page is cached for six hours before being re-generated. You may experience large page load times if the site hasn't been hit in the last six hours.</p>
         <table border="1">
             <tr>
                 <% COLUMNS.each do |col| %>

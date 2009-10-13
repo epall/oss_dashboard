@@ -226,7 +226,7 @@ helpers do
 end
 
 get '/' do
-    headers['Cache-Control'] = "public, max-age=#{60 * 60 * 6}"
+    headers['Cache-Control'] = "public, max-age=#{60 * 60 * 3}"
     raw_projects = YAML.load(File.open('projects.yml'))
     fetch_all_blogs(raw_projects)
     @projects = rank_by_age(raw_projects)
