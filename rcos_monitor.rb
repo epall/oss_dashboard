@@ -58,6 +58,7 @@ def fetch_blog(blog_url)
     blog_url = blog_url['Feed'] unless blog_url.is_a? String
     feed = @feed_cache[get_feed_url(blog_url)]
     if feed.is_a? Fixnum
+        puts "Failed to fetch #{blog_url} feed: #{feed}"
         raise BlogFailError, blog_url
     else
         return feed
