@@ -4,7 +4,6 @@
 require 'rubygems'
 require 'sinatra'
 require 'erb'
-require 'simple-rss'
 require 'open-uri'
 require 'feed_detector'
 require 'yaml'
@@ -14,7 +13,7 @@ require 'activerecord'
 
 SECONDS_IN_DAY = 60 * 60 * 24
 COLUMNS = ['Project Name', 'Contributors', 'Blog', 'Source Code', 'Wiki']
-RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine', 'Trac']
+RSS_ENABLED_REPOSITORIES = ['github', 'Google Code', 'bitbucket', 'cgit', 'Redmine', 'Trac', 'WebSVN']
 
  
 dbconfig = YAML.load(File.read('config/database.yml'))

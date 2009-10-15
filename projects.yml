@@ -172,6 +172,11 @@
     Blog:
         Web: 'http://votebox.us/index.php?f=Blog'
         Feed: 'http://votebox.us/rss.php?f=Blog'
+    Wiki: http://votebox.us/wiki/wikka.php?wakka=HomePage
+    Source Code: http://votebox.us/websvn/listing.php?repname=Votebox
+    Repo:
+         Type: WebSVN
+         URL: http://votebox.us/websvn/listing.php?repname=Votebox
 -
     Project Name: Diagnostic Viewer for Trac    
     Contributors:
