@@ -229,6 +229,10 @@ get '/' do
     raw_projects = YAML.load(File.open('projects.yml'))
     fetch_all_blogs(raw_projects)
     @projects = rank_by_age(raw_projects)
+    @stats = {}
+    @stats['num_projects'] = @projects.size
+    @stats['none'] = @projects.reject{|p| p['Blog'] || p['Wiki'] || p['Source Code']}.size
+    @stats['all_three'] = @projects.select{|p| p['Blog'] && p['Wiki'] && p['Source Code']}.size
     erb :index
 end
 
