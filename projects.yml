@@ -169,6 +169,7 @@
     Repo:
         Type: github
         URL: http://github.com/peterhajas/Lightbulb
+    Wiki: http://wiki.github.com/peterhajas/Lightbulb
 -
     Project Name: Votebox
     Contributors:
