@@ -2,6 +2,13 @@
     <head>
         <title>RCOS Dashboard</title>
         <style type="text/css">
+          table {
+            margin-right: 1em;
+          }
+
+          h1 {
+            text-align: center;
+          }
             th {
                 font-weight: bold;
                 font-size: large;
@@ -23,16 +30,23 @@
             td.yes {
                 background-color: #3F3;
             }
+
+            #sidebar {
+              float: right;
+              width: 23em;
+            }
         </style>
     </head>
     <body>
         <h1>RCOS Dashboard</h1>
-        <p>Welcome to the RCOS Dashboard. Below is a listing of all of the known <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects during the Fall 2009 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet. To see the relationship between age and color, see the <a href="/key">key</a>.</p>
+        <div id="sidebar">
+        <p>Welcome to the RCOS Dashboard, a listing of all of the known <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects during the Fall 2009 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet. To see the relationship between age and color, see the <a href="/key">key</a>.</p>
         <p>Of the <%= @stats['num_projects'] %> projects active in RCOS this semester,</p>
         <ul>
         <li><%= @stats['all_three'] %> have posted a blog, source code, and a wiki</li>
         <li><%= @stats['none'] %> have not posted anything yet</li>
         </ul>
+        </div>
         <table border="1">
             <tr>
                 <% COLUMNS.each do |col| %>
