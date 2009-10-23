@@ -233,6 +233,10 @@ get '/' do
     @stats['num_projects'] = @projects.size
     @stats['none'] = @projects.reject{|p| p['Blog'] || p['Wiki'] || p['Source Code']}.size
     @stats['all_three'] = @projects.select{|p| p['Blog'] && p['Wiki'] && p['Source Code']}.size
+    @stats['last_week'] = @projects.select do |p|
+      p['Blog'] && p['Repo'] && [repo_age(p['Repo']), blog_age(p['Blog'])].min < 7
+    end.size
+
     erb :index
 end
 

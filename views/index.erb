@@ -35,16 +35,21 @@
               float: right;
               width: 23em;
             }
+
+            #sidebar ul {
+              margin-top:-1em;
+            }
         </style>
     </head>
     <body>
         <h1>RCOS Dashboard</h1>
         <div id="sidebar">
         <p>Welcome to the RCOS Dashboard, a listing of all of the known <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects during the Fall 2009 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet. To see the relationship between age and color, see the <a href="/key">key</a>.</p>
-        <p>Of the <%= @stats['num_projects'] %> projects active in RCOS this semester,</p>
+        <p>Of the <b><%= @stats['num_projects'] %></b> projects active in RCOS this semester,</p>
         <ul>
-        <li><%= @stats['all_three'] %> have posted a blog, source code, and a wiki</li>
-        <li><%= @stats['none'] %> have not posted anything yet</li>
+          <li><b><%= @stats['all_three'] %></b> have posted a blog, source code, and a wiki</li>
+          <li><b><%= @stats['last_week'] %></b> have updated in the last week</li>
+          <li><b><%= @stats['none'] %></b> have not posted anything yet</li>
         </ul>
         </div>
         <table border="1">
