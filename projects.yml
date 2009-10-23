@@ -118,6 +118,10 @@
     Website: http://projects.robescriva.com/projects/show/p2p-mirror
     Wiki: http://projects.robescriva.com/wiki/p2p-mirror
     Blog: http://projects.robescriva.com/projects/p2p-mirror/news
+    Source Code: http://projects.robescriva.com/repositories/show/p2p-mirror
+    Repo:
+        Type: Redmine
+        URL: http://projects.robescriva.com/repositories/show/p2p-mirror
 -
     Project Name: Cankids Donation Sytem
     Contributors:
