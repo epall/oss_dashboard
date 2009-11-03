@@ -233,8 +233,14 @@
         - Anonymous?
 -
     Project Name: Gmail Adventures
+    Blog: http://gmailcomicgame.blogspot.com/
+    Source Code: http://code.google.com/p/gamecomic/source/checkout
+    Wiki: http://code.google.com/p/gamecomic/w/list
     Contributors:
         - Jeremy Therrien
+    Repo:
+        Type: Google Code
+        URL: http://code.google.com/p/gamecomic/source/list
 -
     Project Name: RPI Grade Tracker
     Contributors:
@@ -257,8 +263,8 @@
         - Devin Ross
     Blog: http://tapku.com/blog/
     Website: http://devinsheaven.com/irpi/
-    Source Code: http://github.com/tapku/iRPI/tree
-    Wiki: http://wiki.github.com/tapku/iRPI
+    Source Code: http://github.com/devinross/iRPI/
+    Wiki: http://wiki.github.com/devinross/iRPI
     Repo:
         Type: github
-        URL: http://wiki.github.com/tapku/iRPI
+        URL: http://github.com/devinross/iRPI/
