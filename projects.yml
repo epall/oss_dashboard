@@ -112,10 +112,11 @@
         Type: Redmine
         URL: http://projects.robescriva.com/repositories/show/firmant
 -
-    Project Name: Distributed Mirror System
+    Project Name: CHASMd
     Contributors:
         - Robert Escriva
         - Joseph Werther
+        - Ben Boeckel
     Website: http://projects.robescriva.com/projects/show/p2p-mirror
     Wiki: http://projects.robescriva.com/wiki/p2p-mirror
     Blog: http://projects.robescriva.com/projects/p2p-mirror/news
