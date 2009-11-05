@@ -26,10 +26,10 @@
     Website: http://getontracks.org/
     Blog: http://svallens.com/ericontracks/
     Wiki: http://www.getontracks.org/wiki/
-    Source Code: http://github.com/epall/tracks/tree/jquery
+    Source Code: http://github.com/epall/tracks/tree/deps
     Repo:
         Type: github
-        URL: http://github.com/epall/tracks/tree/jquery
+        URL: http://github.com/epall/tracks/tree/deps
 -
     Project Name: Wax PHP Framework
     Contributors:
