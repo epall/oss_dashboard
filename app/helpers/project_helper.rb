@@ -29,7 +29,9 @@ module ProjectHelper
       text.gsub!(/Changeset \[[a-f0-9]+\]: /, '')
       text.gsub!(/Revision .*: /, '')
       text = truncate(text, :length => 70)
-      "<a href=\"#{project.source_code}\">#{text}</a> (#{project.last_update('source_code')})"
+      last_update = '('+project.last_update('source_code')+')'
+      last_update = '' if text == 'No updates'
+      "<a href=\"#{project.source_code}\">#{text}</a> #{last_update}"
     else
       "<a href=\"#{project.source_code}\">Yes</a>"
     end
