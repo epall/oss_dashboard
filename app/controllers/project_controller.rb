@@ -18,14 +18,17 @@ class ProjectController < ApplicationController
   end
 
   def update
+    redirect_to :action => :index
   end
 
   def approve
   end
 
   def new
+    @project = Project.new
   end
 
   def edit
+    @project = Project.find(params[:id])
   end
 end

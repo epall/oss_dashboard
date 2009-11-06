@@ -11,11 +11,14 @@ module ProjectHelper
     elsif column == 'source_code'
       render_source_code(project)
     elsif column == 'name'
+      name = ''
       if project.website.nil?
-        value
+        name = value
       else
-        "<a href=\"#{project.website}\">#{value}</a>"
+        name = "<a href=\"#{project.website}\">#{value}</a>"
       end
+      name += '<div class="edit_link">'+button_to('edit', :action => :edit, :id => project)+'</div>'
+      name
     elsif value.is_a? String and value.match(/http/)
       "<a href=\"#{value}\">Yes</a>"
     else
@@ -49,7 +52,9 @@ module ProjectHelper
 
   def value_class(col_name, project)
     value = project[col_name]
-    unless ['name', 'contributors', 'website'].include? col_name
+    if ['name', 'contributors', 'website'].include? col_name
+      return col_name
+    else
       return 'no' if value.nil?
       if col_name == 'blog'
         return ''
@@ -63,7 +68,6 @@ module ProjectHelper
         return 'yes'
       end
     end
-    ''
   end
 
   def color_from_age(days_old)

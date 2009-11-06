@@ -1,2 +1,28 @@
-<h1>Project#edit</h1>
-<p>Find me in app/views/project/edit.html.erb</p>
+<h1>Editing <%= @project.name %></h1>
+<% form_for :project, @project, :url => {:action => 'update'} do |f| %>
+  <p>
+  <%= f.label :name %>:
+  <%= f.text_field :name %>
+  </p>
+  <p>
+  <%= f.label :website %>:
+  <%= f.text_field :website %>
+  </p>
+  <p>
+  <%= f.label :blog, "Blog URL" %>:
+  <%= f.text_field :blog, :size => 80 %>
+  </p>
+  <p>
+  <%= label_tag "Hosting type" %>:
+  <%= select_tag 'hosting', options_for_select(%w[Redmine GitHub Google\ Code]) %>
+  </p>
+  <p>
+  <%= f.label :source_code, "Source Code URL" %>:
+  <%= f.text_field :source_code, :size => 80 %>
+  </p>
+  <p>
+  <%= f.label :wiki %>:
+  <%= f.text_field :wiki, :size => 80 %>
+  </p>
+  <%= f.submit 'Save' %>
+<% end %>
