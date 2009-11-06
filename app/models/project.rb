@@ -43,8 +43,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-  private
-
   def last_blog_entry
     @blog_feed_data.entries.first rescue nil
   end
@@ -52,6 +50,8 @@ class Project < ActiveRecord::Base
   def last_source_code_entry
     @source_code_feed_data.entries.first rescue nil
   end
+  
+  private
 
   # different blog engines use different RSS fields to specifiy when an entry
   # was published. This method evens that all out so you always get a DateTime

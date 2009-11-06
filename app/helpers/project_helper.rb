@@ -3,11 +3,9 @@ module ProjectHelper
     value = project[column]
     return 'No' if value.nil?
     if column == 'blog'
-      if value.is_a? String
-        "<a href=\"#{value}\">Yes</a> (#{project.last_update(column)})"
-      else
-        "<a href=\"#{value['Web']}\">Yes</a> (#{project.last_update(column)})"
-      end
+      text = project.last_blog_entry.title rescue 'No updates'
+      text = truncate(text, :length => 50)
+      "<a href=\"#{value}\">#{text}</a> (#{project.last_update(column)})"
     elsif column == 'contributors'
       value.gsub(',', "\n<br>\n")
     elsif column == 'source_code'
@@ -27,7 +25,11 @@ module ProjectHelper
 
   def render_source_code(project)
     if project.source_code_feed
-      "<a href=\"#{project.source_code}\">Yes</a> (#{project.last_update('source_code')})"
+      text = project.last_source_code_entry.title rescue 'No updates'
+      text.gsub!(/Changeset \[[a-f0-9]+\]: /, '')
+      text.gsub!(/Revision .*: /, '')
+      text = truncate(text, :length => 70)
+      "<a href=\"#{project.source_code}\">#{text}</a> (#{project.last_update('source_code')})"
     else
       "<a href=\"#{project.source_code}\">Yes</a>"
     end
