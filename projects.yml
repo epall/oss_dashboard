@@ -250,9 +250,15 @@
         URL: http://code.google.com/p/gamecomic/source/list
 -
     Project Name: RPI Grade Tracker
+    Blog: http://rpigradetracker.blogspot.com/
+    Source Code: http://github.com/CBrown/RPI-Grade-Tracker
+    Wiki: http://wiki.github.com/CBrown/RPI-Grade-Tracker
     Contributors:
         - Chris Brown
         - Rob Margolies
+    Repo:
+        Type: github
+        URL: http://github.com/CBrown/RPI-Grade-Tracker/commits/master
 -
     Project Name: Bonsai
     Contributors:
