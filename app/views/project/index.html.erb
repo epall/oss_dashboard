@@ -44,7 +44,7 @@
     <body>
         <h1>RCOS Dashboard</h1>
         <div id="sidebar">
-        <p>Welcome to the RCOS Dashboard, a listing of all of the known <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects during the Fall 2009 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet. To see the relationship between age and color, see the <a href="/key">key</a>.</p>
+        <p>Welcome to the RCOS Dashboard, a listing of all of the known <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects during the Fall 2009 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet.</p>
         <p>Of the <b><%= @stats['num_projects'] %></b> projects active in RCOS this semester,</p>
         <ul>
           <li><b><%= @stats['all_three'] %></b> have posted a blog, source code, and a wiki</li>
@@ -54,17 +54,18 @@
         </div>
         <table border="1">
             <tr>
-                <% COLUMNS.each do |col| %>
-                    <th>
-                        <%= col %>
-                    </th>
+                <% Project.display_columns.map{|name| name.gsub('_', ' ').capitalize}.each do |col| %>
+                    <th><%= col %></th>
                 <% end %>
             </tr>
 
             <% @projects.each do |project| %>
                 <tr>
-                    <% COLUMNS.each do |col| %>
-                        <td class="<%= value_class(col, project) %>" style="<%= value_style(col, project)%>"><%= render_column(col, project) %></td>
+                    <% Project.display_columns.each do |col| %>
+                      <td class="<%= value_class(col, project) %>"
+                        style="<%= value_style(col, project)%>">
+                        <%= column_contents(col, project) %>
+                      </td>
                     <% end %>
                 </tr>
             <% end %>
