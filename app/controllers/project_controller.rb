@@ -10,6 +10,8 @@ class ProjectController < ApplicationController
     @stats['last_week'] = @projects.select{|p| p.age < 7}.size
 
     @legit_coumns = Project.columns.find_all{|c| c.type == :string}.map(&:name).map{|name| name.gsub('_', ' ').capitalize} - ['Password', 'Blog feed', 'Source code feed', 'Website']
+
+    expires_in 1.hour, :public => true
   end
 
   def create
