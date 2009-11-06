@@ -58,7 +58,7 @@ class Project < ActiveRecord::Base
   # for when the most recent entry was updated.
   def publish_time(entry)
     return nil if entry.nil?
-    return entry.updated || entry.published || entry.pubDate
+    (entry.updated || entry.published || entry.pubDate).in_time_zone
   end
 
   def entry_age(entry)
