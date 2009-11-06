@@ -1,3 +1,12 @@
+<script src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("jquery", "1");
+  google.load("jqueryui", "1");
+  google.setOnLoadCallback(function(){
+      $('select#hosting').change(function(){
+        });
+      });
+</script>
 <h1>Editing <%= @project.name %></h1>
 <% form_for :project, @project, :url => {:action => 'update'} do |f| %>
   <p>
