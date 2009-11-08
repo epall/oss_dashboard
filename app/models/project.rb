@@ -50,6 +50,17 @@ class Project < ActiveRecord::Base
   def last_source_code_entry
     @source_code_feed_data.entries.first rescue nil
   end
+
+
+  def before_save
+    if blog_changed? && blog && blog != ''
+      self.blog_feed = FeedDetector.fetch_feed_url(self.blog)
+    end
+
+    if source_code_changed? && source_code && source_code != ''
+      self.source_code_feed = FeedDetector.fetch_feed_url(self.source_code)
+    end
+  end
   
   private
 

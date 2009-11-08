@@ -8,7 +8,11 @@
       });
 </script>
 <h1>Editing <%= @project.name %></h1>
-<% form_for :project, @project, :url => {:action => 'update'} do |f| %>
+<% if flash[:notice] %>
+  <div class="notice" style="padding:5px; background-color:#FFAAAA; border: 2px solid red"><%= flash[:notice] %></div>
+<% end %>
+
+<% form_for :project, @project, :url => {:action => 'update', :id => @project} do |f| %>
   <p>
   <%= f.label :name %>:
   <%= f.text_field :name %>
@@ -21,10 +25,12 @@
   <%= f.label :blog, "Blog URL" %>:
   <%= f.text_field :blog, :size => 80 %>
   </p>
+  <!--
   <p>
   <%= label_tag "Hosting type" %>:
   <%= select_tag 'hosting', options_for_select(%w[Redmine GitHub Google\ Code]) %>
   </p>
+  -->
   <p>
   <%= f.label :source_code, "Source Code URL" %>:
   <%= f.text_field :source_code, :size => 80 %>
@@ -33,5 +39,11 @@
   <%= f.label :wiki %>:
   <%= f.text_field :wiki, :size => 80 %>
   </p>
+
+  <p>
+  <%= label_tag 'admin_password', 'Administration Password:' %>
+  <%= text_field_tag 'admin_password' %>
+  </p>
+
   <%= f.submit 'Save' %>
 <% end %>

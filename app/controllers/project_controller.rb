@@ -18,6 +18,15 @@ class ProjectController < ApplicationController
   end
 
   def update
+    if ENV['ADMIN_PASSWORD'] != params[:admin_password]
+      flash[:notice] = "Access denied"
+      redirect_to :back
+      return
+    end
+
+    @project = Project.find(params[:id])
+    @project.update_attributes!(params[:project])
+
     redirect_to :action => :index
   end
 
