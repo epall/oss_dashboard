@@ -55,20 +55,6 @@ class Project < ActiveRecord::Base
   def before_save
     self.website = nil if self.website == ''
     self.wiki = nil if self.wiki == ''
-
-    if blog_changed? && blog && blog != ''
-      blog_feed = FeedDetector.fetch_feed_url(self.blog)
-      if blog_feed != self.blog
-        self.blog_feed = blog_feed
-      end
-    end
-
-    if source_code_changed? && source_code && source_code != ''
-      source_code_feed = FeedDetector.fetch_feed_url(self.source_code)
-      if source_code_feed != self.source_code
-        self.source_code_feed = source_code_feed
-      end
-    end
   end
   
   private

@@ -1,4 +1,5 @@
 class ProjectController < ApplicationController
+  layout 'application', :except => :index
   def index
     @projects = Project.fetch
     
@@ -25,7 +26,25 @@ class ProjectController < ApplicationController
     end
 
     @project = Project.find(params[:id])
+    @project ||= Project.new
     @project.update_attributes!(params[:project])
+
+    case params[:hosting]
+    when 'Redmine'
+      @project.source_code = params['redmine'].sub('projects/show', 'repositories/show')
+      @project.source_code_feed = @project.source_code.sub('repositories/show', 'repositories/revisions')+'?format=atom'
+    when 'GitHub'
+      member, project = params['github'].split('/')
+      @project.source_code = "http://github.com/#{member}/#{project}"
+      @project.source_code_feed = "http://github.com/feeds/#{member}/commits/#{project}/master"
+    when 'Google Code'
+      project_name = params['googlecode']
+      @project.source_code = "http://code.google.com/p/#{project_name}/source/browse/"
+      @project.source_code_feed = "http://code.google.com/feeds/p/#{project_name}/svnchanges/basic"
+    else
+      raise "Unrecognized hosting type"
+    end
+    @project.save!
 
     redirect_to :action => :index
   end
@@ -35,6 +54,7 @@ class ProjectController < ApplicationController
 
   def new
     @project = Project.new
+    render :action => 'edit'
   end
 
   def edit
