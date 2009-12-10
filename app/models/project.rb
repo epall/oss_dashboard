@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  has_many :events
+  
   def self.fetch
     projects = all
     urls = projects.map(&:blog_feed) + projects.map(&:source_code_feed)

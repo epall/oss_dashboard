@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091106014750) do
+ActiveRecord::Schema.define(:version => 20091210223829) do
+
+  create_table "events", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "type"
+    t.string   "identifier"
+    t.string   "title"
+    t.string   "permalink"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
