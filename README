@@ -1,1 +1,3 @@
-RCOS Dashboard is a web app for checking on the status of the active projects sponsored by the Rensselaer Center for Open Source. It's hosted at http://rcos-monitor.heroku.com/, and this is the code for it. Feel free to fork and file bugs!
+OSS Dashboard is a web app for keeping tabs on open source projects. It is used
+extensively by the Rensselaer Center for Open Source, and its development is
+funded by Sean O'Sullivan's generous donation to the Center.
