@@ -1,1 +1,1 @@
-pauldix-feedzirra --source http://gems.github.com
+feedzirra --source http://gemcutter.org
