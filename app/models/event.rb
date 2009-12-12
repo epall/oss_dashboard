@@ -1,8 +1,12 @@
 class Event < ActiveRecord::Base
   belongs_to :project
   validates_uniqueness_of :identifier
+  default_scope :order => 'created_at ASC'
+  named_scope :blog, :conditions => {:entry_type => 'blog'}
+  named_scope :code, :conditions => {:entry_type => 'code'}
   
   def self.create_if_new(project, raw_article, type)
+    return if raw_article.title.nil?
     event = Event.new do |e|
       e.project = project
       e.entry_type = type

@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20091212183806) do
     t.string   "title"
     t.string   "permalink"
     t.text     "content"
+    t.text     "summary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,6 +38,10 @@ ActiveRecord::Schema.define(:version => 20091212183806) do
     t.datetime "updated_at"
     t.string   "etag"
     t.datetime "last_modified"
+    t.string   "blog_etag"
+    t.datetime "blog_last_modified"
+    t.string   "code_etag"
+    t.datetime "code_last_modified"
   end
 
 end

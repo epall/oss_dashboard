@@ -1,11 +1,12 @@
 class Project < ActiveRecord::Base
   has_many :events
   
-  def self.fetch
-    projects = all
-    urls = projects.map(&:blog_feed) + projects.map(&:source_code_feed)
-    urls.compact!
-    feed_cache = Feedzirra::Feed.fetch_and_parse(urls, {:timeout => 25})
+  def self.fetch(*args)
+    projects = all(:limit => args[0])
+    feed_objects = projects.map(&:blog_parser) + projects.map(&:source_code_parser)
+    feed_objects.compact!
+    feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 25})
+    feed_cache.reject! {|e| e.is_a? Fixnum}
     projects.each {|p| p.update_from_feed(feed_cache)}
     return projects.sort_by(&:age)
   end
@@ -23,20 +24,58 @@ class Project < ActiveRecord::Base
     return score
   end
 
+  def blog_parser
+    return nil if blog_feed.nil?
+
+    feed_to_update               = Feedzirra::Parser::Atom.new
+    feed_to_update.feed_url      = blog_feed
+    feed_to_update.etag          = blog_etag
+    feed_to_update.last_modified = blog_last_modified
+
+    last_entry     = Feedzirra::Parser::AtomEntry.new
+    last_entry.url = self.events.blog.last.permalink rescue nil
+    feed_to_update.entries = [last_entry]
+
+    return feed_to_update
+  end
+
+  def source_code_parser
+    return nil if source_code_feed.nil?
+
+    feed_to_update               = Feedzirra::Parser::Atom.new
+    feed_to_update.feed_url      = source_code_feed
+    feed_to_update.etag          = code_etag
+    feed_to_update.last_modified = code_last_modified
+
+    last_entry     = Feedzirra::Parser::AtomEntry.new
+    last_entry.url = self.events.code.last.permalink rescue nil
+    feed_to_update.entries = [last_entry]
+
+    return feed_to_update
+  end
+
   def update_from_feed(feed_cache)
-    @blog_feed_data = feed_cache[blog_feed]
-    @source_code_feed_data = feed_cache[source_code_feed]
-    #self.last_modified = feed.last_modified
-    #self.etag = feed.etag
+    @blog_feed_data = feed_cache.find {|f| f.feed_url == blog_feed }
+    @source_code_feed_data = feed_cache.find {|f| f.feed_url == source_code_feed }
+    self.blog_last_modified = @blog_feed_data.last_modified rescue nil
+    self.blog_etag = @blog_feed_data.etag rescue nil
+    self.code_last_modified = @source_code_feed_data.last_modified rescue nil
+    self.code_etag = @source_code_feed_data.etag rescue nil
+    self.save!
     generate_events()
   end
   
   def generate_events
-    @blog_feed_data.entries.each do |entry|
-      Event.create_if_new(self, entry, 'blog')
+    if @blog_feed_data
+      @blog_feed_data.entries.each do |entry|
+        Event.create_if_new(self, entry, 'blog')
+      end
     end
-    @source_code_feed_data.entries.each do |entry|
-      Event.create_if_new(self, entry, 'code')
+
+    if @source_code_feed_data
+      @source_code_feed_data.entries.each do |entry|
+        Event.create_if_new(self, entry, 'code')
+      end
     end
   end
 
@@ -51,18 +90,18 @@ class Project < ActiveRecord::Base
   def last_update(column)
     case column
     when 'blog'
-      return publish_time(last_blog_entry).strftime('%m/%d') rescue "No updates"
+      return events.blog.last.created_at.strftime('%m/%d') rescue "No updates"
     when 'source_code'
-      return publish_time(last_source_code_entry).strftime('%m/%d') rescue "No updates"
+      return events.code.last.created_at.strftime('%m/%d') rescue "No updates"
     end
   end
 
   def last_blog_entry
-    @blog_feed_data.entries.first rescue nil
+    events.blog.last
   end
 
   def last_source_code_entry
-    @source_code_feed_data.entries.first rescue nil
+    events.code.last
   end
 
 
@@ -73,17 +112,8 @@ class Project < ActiveRecord::Base
   
   private
 
-  # different blog engines use different RSS fields to specifiy when an entry
-  # was published. This method evens that all out so you always get a DateTime
-  # for when the most recent entry was updated.
-  def publish_time(entry)
-    return nil if entry.nil?
-    (entry.updated || entry.published || entry.pubDate).in_time_zone
-  end
-
   def entry_age(entry)
-    published = nil
-    published = publish_time(entry)
+    published = entry.created_at rescue nil
     return 100 unless published
 
     age = Time.now - published

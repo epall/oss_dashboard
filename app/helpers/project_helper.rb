@@ -29,6 +29,7 @@ module ProjectHelper
   def render_source_code(project)
     if project.source_code_feed
       text = project.last_source_code_entry.title rescue 'No updates'
+      text ||= ''
       text.gsub!(/Changeset \[[a-f0-9]+\]: /, '')
       text.gsub!(/Revision .*: /, '')
       text = truncate(text, :length => 70)
