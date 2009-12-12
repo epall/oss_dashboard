@@ -26,15 +26,17 @@ class Project < ActiveRecord::Base
   def update_from_feed(feed_cache)
     @blog_feed_data = feed_cache[blog_feed]
     @source_code_feed_data = feed_cache[source_code_feed]
+    #self.last_modified = feed.last_modified
+    #self.etag = feed.etag
     generate_events()
   end
   
   def generate_events
-    @blog_feed_data.each do |entry|
-      Event.create_if_new(entry, 'blog')
+    @blog_feed_data.entries.each do |entry|
+      Event.create_if_new(self, entry, 'blog')
     end
-    @source_code_feed_data.each do |entry|
-      Event.create_if_new(entry, 'code')
+    @source_code_feed_data.entries.each do |entry|
+      Event.create_if_new(self, entry, 'code')
     end
   end
 
