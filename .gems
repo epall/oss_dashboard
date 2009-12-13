@@ -1,1 +1,2 @@
 feedzirra --source http://gemcutter.org
+will_paginate --source http://gemcutter.org

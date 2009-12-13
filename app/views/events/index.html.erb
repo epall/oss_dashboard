@@ -1,0 +1,11 @@
+<% @title = "RCOS Blog Aggregate" -%>
+<h1><%= @title %></h1>
+<% @events.each do |event| -%>
+  <div class="article">
+    <h3><%= link_to event.project.name + ' | ' + event.title, event.permalink %></h3>
+    <div class="datestamp">Posted on <%= event.created_at.to_formatted_s(:long) %></div>
+    <%= event.summary || event.content %>
+  </div>
+<% end -%>
+<%= will_paginate @events, :previous_label => '« Newer', :next_label => 'Older »',
+  :page_links => false %>
