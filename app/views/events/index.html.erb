@@ -1,4 +1,7 @@
 <% @title = "RCOS Blog Aggregate" -%>
+<% content_for :head do %>
+<%= auto_discovery_link_tag(:atom, :format => :atom) %>
+<% end %>
 <h1><%= @title %></h1>
 <% @events.each do |event| -%>
   <div class="article">
