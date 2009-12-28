@@ -1,20 +1,6 @@
 <html>
     <head>
         <title>RCOS Dashboard</title>
-        <script src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("jquery", "1");
-          google.load("jqueryui", "1");
-          google.setOnLoadCallback(function(){
-              $('.edit_link').hide();
-              $('td.name').mouseenter(function(){
-                $(this).find('.edit_link').show('blind');
-                });
-              $('td.name').mouseleave(function(){
-                $(this).find('.edit_link').hide('blind');
-                });
-              });
-        </script>
         <style type="text/css">
           table {
             margin-right: 1em;
@@ -62,9 +48,6 @@
             #stats ul {
               margin: 0px;
             }
-
-            .edit_link form {
-              margin:0px;
         </style>
     </head>
     <body>
