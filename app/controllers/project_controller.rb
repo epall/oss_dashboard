@@ -1,5 +1,7 @@
 class ProjectController < ApplicationController
   layout 'application', :except => :index
+  layout 'simple', :only => :new
+
   def index
     if params[:update]
       @projects = Project.fetch
@@ -55,8 +57,6 @@ class ProjectController < ApplicationController
   end
 
   def new
-    @project = Project.new
-    render :action => 'edit'
   end
 
   def edit
