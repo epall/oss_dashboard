@@ -65,10 +65,19 @@
 
             .edit_link form {
               margin:0px;
+            }
+              
+            .menu {
+              text-align: center;
+            }
         </style>
     </head>
     <body>
         <h1>RCOS Dashboard</h1>
+        <div class="menu">
+          <%= link_to 'Add project', :action => :new %> |
+          <%= link_to 'Blog aggregate', :controller => :events %> |
+          <%= link_to 'Update', :update => 1 %></div>
         <div id="description">
           <div id="stats">
             <p>Of the <b><%= @stats['num_projects'] %></b> projects active in RCOS this semester,</p>
