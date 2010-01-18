@@ -1,5 +1,5 @@
 class HostingType
   def self.enumerate
-    ['custom', 'GitHub', 'Redmine', 'bitbucket', 'Google Code']
+    ['custom', 'GitHub', 'Redmine', 'Google Code']
   end
 end

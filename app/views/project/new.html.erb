@@ -4,7 +4,11 @@
     $(function(){
         $('#hosting').change(function(){
           $('.hosting').hide();
-          $("#hosting_"+this.value.replace(" ", "_")).show();
+          $(".hosting."+this.value.replace(" ", "_")).show();
+          
+          if(this.value == "Redmine"){
+            $('#blog_info').hide();
+          }
           });
         });
 </script>
@@ -14,12 +18,12 @@
     display: none;
   }
 
-  #hosting_custom {
+  .hosting.custom {
     display: table-row;
   }
 
   table#project_entry th {
-    width: 8em;
+    width: 20em;
     text-align: right;
     padding-right: 1em;
   }
@@ -31,6 +35,7 @@
 
   table {
     margin: auto;
+    padding-right: 12em;
   }
 </style>
 <% end %>
@@ -50,17 +55,31 @@
       <th><%= label_tag :hosting %></th>
       <td><%= select_tag :hosting, options_for_select(HostingType.enumerate) %></td>
     </tr>
-    <tr class="hosting" id="hosting_GitHub">
+    <tr class="hosting GitHub">
       <th><%= label_tag :github, "Project name<br><em>(e.g. epall/tracks)</em>" %> </th>
       <td><%= text_field_tag :github %></td>
     </tr>
-    <tr class="hosting" id="hosting_Redmine">
-      <th><%= label_tag :redmine_home, "Redmine home" %></th>
+    <tr class="hosting Redmine">
+      <th><label for="redmine_home">Redmine home<br>
+        <em>(e.g. http://rpinventory.com/projects/show/rpinventory)</label></th>
       <td><%= text_field_tag :redmine_home %></td>
     </tr>
-    <tr class="hosting" id="hosting_custom">
+    <tr class="hosting custom">
       <th><%= label_tag :custom_url, "Source Code URL" %></th>
       <td><%= text_field_tag :custom_url %></td>
+    </tr>
+    <tr class="hosting custom">
+      <th><%= label_tag :custom_wiki, "Wiki URL" %></th>
+      <td><%= text_field_tag :custom_wiki %></td>
+    </tr>
+    <tr class="hosting Google_Code">
+      <th><label for="googlecode">Project Name<br><em>(e.g. dplms)</em></br></label></th>
+      <td><%= text_field_tag :googlecode %></td>
+    </tr>
+    
+    <tr class="blog" id="blog_info">
+      <th><%= label_tag :blog_url, "Blog URL<br><em>(e.g. http://ngodb.blogspot.com/)</em>" %></th>
+      <td><%= text_field_tag :blog_url %></td>
     </tr>
 
     <tr>
