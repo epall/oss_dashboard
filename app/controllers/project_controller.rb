@@ -99,6 +99,8 @@ class ProjectController < ApplicationController
 
   def new
   end
+  
+  private
 
   def edit
     @project = Project.find(params[:id])
