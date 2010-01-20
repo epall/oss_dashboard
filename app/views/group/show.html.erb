@@ -75,9 +75,11 @@
     <body>
         <h1><%= @group.name %> Dashboard</h1>
         <div class="menu">
-          <%= link_to 'Add project', :action => :new %> |
+          <%= link_to 'Add project', :controller => :project, :action => :new %> |
           <%= link_to 'Blog aggregate', :controller => :events %> |
-          <%= link_to 'Update', :update => 1 %></div>
+          <%= link_to 'Update', :controller => :project, :action => :fetch %> |
+          <%= link_to 'Admin', :action => :admin, :id => @group.id %>
+        </div>
         <div id="description">
           <div id="stats">
             <p>Of the <b><%= @stats['num_projects'] %></b> projects active in <%= @group.name %> this semester,</p>

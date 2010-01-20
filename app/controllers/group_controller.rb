@@ -20,6 +20,6 @@ class GroupController < ApplicationController
   end
 
   def admin
+    @group = Group.find(params[:id], :include => [:projects])
   end
-
 end

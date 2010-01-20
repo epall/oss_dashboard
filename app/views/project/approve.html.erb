@@ -1,2 +1,14 @@
-<h1>Project#approve</h1>
-<p>Find me in app/views/project/approve.html.erb</p>
+<h1>Approve <%= @project.name %></h1>
+<% if flash[:notice] %>
+  <div class="notice" style="padding:5px; background-color:#FFAAAA; border: 2px solid red"><%= flash[:notice] %></div>
+<% end %>
+<% form_tag do %>
+  <%= hidden_field_tag "id", @project.id %>
+  <p>
+    <label for="admin_password">Admin password</label>
+    <input type="text" name="admin_password"></input>
+  <p>
+  <p>
+    <%= submit_tag "Approve" %>
+  </p>
+<% end %>

@@ -52,14 +52,13 @@ class ProjectController < ApplicationController
   end
 
   def update
-    if ENV['ADMIN_PASSWORD'] != params[:admin_password]
+    @project = Project.find(params[:id])
+    if @project.group.admin_password != params[:admin_password]
       flash[:notice] = "Access denied"
       redirect_to :back
       return
     end
 
-    @project = Project.find(params[:id])
-    @project ||= Project.new
     @project.update_attributes!(params[:project])
 
     case params[:hosting]
@@ -83,13 +82,21 @@ class ProjectController < ApplicationController
   end
 
   def approve
+    @project = Project.find(params[:id], :include => [:group])
+    if request.method == :post
+      if params[:admin_password] == @project.group.admin_password
+        @project.update_attribute('approved', true)
+        redirect_to :controller => :group, :action => :admin, :id => @project.group.id
+      else
+      flash[:notice] = "Access denied"
+      redirect_to :back
+      end
+    end
   end
 
   def new
   end
   
-  private
-
   def edit
     @project = Project.find(params[:id])
   end
