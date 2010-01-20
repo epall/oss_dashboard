@@ -2,21 +2,9 @@ class ProjectController < ApplicationController
   layout 'application', :except => :index
   layout 'simple', :only => [:new, :create]
 
-  def index
-    if params[:update]
-      @projects = Project.fetch
-    else
-      @projects = Project.approved.sort_by(&:age)
-    end
-    
-    # generate statistics
-    @stats = {}
-    @stats['num_projects'] = @projects.size
-    @stats['none'] = @projects.reject{|p| p.blog || p.wiki || p.source_code}.size
-    @stats['all_three'] = @projects.select{|p| p.blog && p.wiki && p.source_code}.size
-    @stats['last_week'] = @projects.select{|p| p.age < 7}.size
-
-    @legit_coumns = Project.columns.find_all{|c| c.type == :string}.map(&:name).map{|name| name.gsub('_', ' ').capitalize} - ['Password', 'Blog feed', 'Source code feed', 'Website']
+  def fetch
+    Project.fetch
+    redirect_to :controller => 'group', :action => 'index'
   end
 
   def create
