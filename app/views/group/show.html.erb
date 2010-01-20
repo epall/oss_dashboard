@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>RCOS Dashboard</title>
+      <title><%= @group.name %> Dashboard</title>
         <style type="text/css">
           table {
             margin-right: 1em;
@@ -48,20 +48,30 @@
             #stats ul {
               margin: 0px;
             }
+
+            .menu {
+              text-align: center;
+            }
         </style>
     </head>
     <body>
-        <h1>RCOS Dashboard</h1>
+        <h1><%= @group.name %> Dashboard</h1>
+        <div class="menu">
+          <%= link_to 'Add project', :controller => :project, :action => :new %> |
+          <%= link_to 'Blog aggregate', :controller => :events %> |
+          <%= link_to 'Update', :controller => :project, :action => :fetch %> |
+          <%= link_to 'Admin', :action => :admin, :id => @group.id %>
+        </div>
         <div id="description">
           <div id="stats">
-            <p>Of the <b><%= @stats['num_projects'] %></b> projects active in RCOS this semester,</p>
+            <p>Of the <b><%= @stats['num_projects'] %></b> projects active in <%= @group.name %> this semester,</p>
             <ul>
               <li><b><%= @stats['all_three'] %></b> have posted a blog, source code, and a wiki</li>
               <li><b><%= @stats['last_week'] %></b> have updated in the last week</li>
               <li><b><%= @stats['none'] %></b> have not posted anything yet</li>
             </ul>
           </div>
-          <p>Welcome to the RCOS Dashboard, a listing of all of the <a href="http://www.cs.rpi.edu/~moorthy/rcos/">Rensselaer Center for Open Source</a> projects of the Spring 2010 semester ranked by how recently they have been updated. Green means recent, yellow means older, orange means stale, and red means the project hasn't posted that component yet.</p>
+          <p><%= @group.description %></p>
         </div>
         <table border="1">
             <tr>

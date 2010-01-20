@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091212183806) do
+ActiveRecord::Schema.define(:version => 20100120063159) do
 
   create_table "events", :force => true do |t|
     t.integer  "project_id"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20091212183806) do
     t.string   "permalink"
     t.text     "content"
     t.text     "summary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "admin_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,12 +44,11 @@ ActiveRecord::Schema.define(:version => 20091212183806) do
     t.string   "contributors"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "etag"
-    t.datetime "last_modified"
     t.string   "blog_etag"
     t.datetime "blog_last_modified"
     t.string   "code_etag"
     t.datetime "code_last_modified"
+    t.integer  "group_id"
   end
 
 end

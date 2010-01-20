@@ -1,2 +1,10 @@
-<h1>Project#create</h1>
-<p>Find me in app/views/project/create.html.erb</p>
+<h1>Project created</h1>
+<p>Your project, <%= @project.name %>, has been successfully created.
+  It will show up on the <%= link_to 'main page', :action => :index %> once it has 
+  been approved by the administrator.</p>
+  
+<p>The password for your project is <span class="pass"><%= @project.password %></span>.
+  Keep this in a safe place, as it is required for updating project attributes later on.</p>
+
+<%= link_to 'Home', :action => :index %>
+

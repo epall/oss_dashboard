@@ -1,0 +1,11 @@
+<h1>Group admin</h1>
+<table cellspacing="1" border="1" cellpadding="5">
+  <% @group.projects.each do |project| -%>
+    <tr>
+      <td><%= project.name %></td>
+      <td>
+        <%= link_to 'Edit', :controller => :project, :action => :edit, :id => project.id %>
+        <%= link_to("Approve", approve_url(project)) unless project.approved? %></td>
+    </tr>
+  <% end -%>
+</table>
