@@ -17,7 +17,6 @@ module ProjectHelper
       else
         name = "<a href=\"#{project.website}\">#{value}</a>"
       end
-      name += '<div class="edit_link">'+button_to('edit', :action => :edit, :id => project)+'</div>'
       name
     elsif value.is_a? String and value.match(/http/)
       "<a href=\"#{value}\">Yes</a>"
