@@ -11,6 +11,7 @@ class ProjectController < ApplicationController
     @project = Project.new
     @project.name = params[:name]
     @project.contributors = params[:contributors]
+    @project.group = Group.first # TODO generalize
     
     if not params[:github].empty?
       @project.blog = params[:blog_url]
@@ -40,9 +41,9 @@ class ProjectController < ApplicationController
       @project.wiki = "http://code.google.com/p/#{name}/w/list"
     else # custom
       @project.blog = params[:blog_url]
-      @project.blog_feed = FeedDetector.fetch_feed_url(@project.blog)
+      @project.blog_feed = FeedDetector.fetch_feed_url(@project.blog) rescue ""
       @project.source_code = params[:custom_url]
-      @project.source_code_feed = FeedDetector.fetch_feed_url(@project.source_code)
+      @project.source_code_feed = FeedDetector.fetch_feed_url(@project.source_code) rescue ""
       @project.wiki = params[:custom_wiki]
     end
     

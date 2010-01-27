@@ -40,9 +40,10 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
   #
   map.approve 'project/approve/:id', :controller => 'project', :action => 'approve'
+  map.showgroup 'g/:id', :controller => 'group', :action => 'show'
 
   map.root :controller => 'group'
-  map.resource :project
+  #map.resource :project
 
 
   map.connect ':controller/:action/:id.:format'
