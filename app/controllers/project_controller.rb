@@ -87,7 +87,7 @@ class ProjectController < ApplicationController
     if request.method == :post
       if params[:admin_password] == @project.group.admin_password
         @project.update_attribute('approved', true)
-        redirect_to :controller => :group, :action => :admin, :id => @project.group.id
+        redirect_to :controller => :project, :action => :fetch
       else
       flash[:notice] = "Access denied"
       redirect_to :back
