@@ -1,0 +1,93 @@
+html { 
+	font-family: "Myriad Pro", Calibri, "Trebuchet MS", Helvetica, Arial, sans-serif;
+	background: rgb(255, 250, 240);
+	color: #2e3436;
+}
+
+body {
+	margin: 25px 50px 0px 50px;
+}
+
+table {
+	border: 1px solid black;
+	font-size: small;
+	width: 100%;
+}
+
+a {
+	color: #2e3426;
+}
+
+p {
+	text-align: justify;
+	width: 55% !important;
+}
+
+div#stats {
+	width: 40% !important;
+	margin-left: 30px !important;
+}
+
+#stats p {
+	width: 100% !important;
+}
+
+h1 {
+	font-size: 25pt;
+	border-bottom: 1px dashed black;
+	text-shadow: #FFF -2px -2px 1px;
+}
+
+th {
+	font-weight: bold;
+	font-size: large;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	/*padding-top: 5px;
+	padding-bottom: 5px;*/
+	background: #2e3426;
+	color: #eeeeec;
+	border: 0px;
+}
+
+td {
+	text-align: left;
+	border: none;
+	border-bottom: 1px solid black;
+	margin: 0px;
+}
+
+tr {
+	padding: 0px;
+	margin: 0px;
+}
+
+td.no {
+	background-color: red;
+}
+
+td.yes {
+	background-color: #3F3;
+}
+
+#description > p {
+	width:60%;
+}
+
+#stats {
+	float: right;
+	width: 40%;
+	margin-left: 5em;
+}
+
+#stats p {
+	margin: 0px;
+}
+
+#stats ul {
+	margin: 0px;
+}
+
+.edit_link form {
+margin:0px;
+}
