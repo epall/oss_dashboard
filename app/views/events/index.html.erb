@@ -2,12 +2,11 @@
 <% content_for :head do %>
 <%= auto_discovery_link_tag(:atom, :format => :atom) %>
 <% end %>
-<h1><%= @title %></h1>
 <% @events.each do |event| -%>
   <div class="article">
     <h3><%= link_to event.project.name + ' | ' + event.title, event.permalink %></h3>
     <div class="datestamp">Posted on <%= event.created_at.to_formatted_s(:long) %></div>
-    <%= event.summary || event.content %>
+    <p><%= event.summary || event.content %></p>
   </div>
 <% end -%>
 <%= will_paginate @events, :previous_label => '« Newer', :next_label => 'Older »',
