@@ -1,5 +1,3 @@
-require 'Color'
-
 module ProjectHelper
   def column_contents(column, project)
     value = project[column]
