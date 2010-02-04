@@ -1,3 +1,5 @@
+require 'Color'
+
 module ProjectHelper
   def column_contents(column, project)
     value = project[column]
@@ -42,9 +44,9 @@ module ProjectHelper
 
   def value_style(col_name, project)
     if col_name == 'blog' && project['blog']
-      return color_from_age(project.blog_age)
+      return "background-color: " + color_from_age(project.blog_age)
     elsif col_name == 'source_code' && project.source_code_feed
-      return color_from_age(project.source_code_age)
+      return "background-color: " + color_from_age(project.source_code_age)
     else
       return ''
     end
@@ -55,33 +57,22 @@ module ProjectHelper
     if ['name', 'contributors', 'website'].include? col_name
       return col_name
     else
-      return 'no' if value.nil?
+      return 'red' if value.nil?
       if col_name == 'blog'
         return ''
       elsif col_name == 'source_code'
         if project.source_code_feed
           return ''
         else
-          return 'yes'
+          return 'green'
         end
       else
-        return 'yes'
+        return 'green'
       end
     end
   end
 
   def color_from_age(days_old)
-    green = red = 0
-    if days_old < 15
-      green = 255
-      red = 255.0*(1.0 - 1.20**-days_old)
-    elsif days_old < 30
-      red = 255
-      green = 255.0*(1.08**(15-days_old))
-    else
-      red = 255
-      green = 80
-    end
-    return 'background-color:#'+sprintf('%02x', red.to_i)+sprintf('%02x', green)+'00;'
+    return Color::HSL.new(100 - days_old, 53, 70).html()
   end
 end

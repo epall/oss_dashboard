@@ -62,12 +62,12 @@ tr {
 	margin: 0px;
 }
 
-td.no {
+td.red {
 	background-color: red;
 }
 
-td.yes {
-	background-color: #3F3;
+td.green {
+	background-color: green;
 }
 
 #description > p {
