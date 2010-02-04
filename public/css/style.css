@@ -1,12 +1,13 @@
 html { 
 	font-family: "Myriad Pro", Calibri, "Trebuchet MS", Helvetica, Arial, sans-serif;
-	background: rgb(255, 250, 240);
+	background: #555753;
 	color: #2e3436;
 }
 
 html, body {
 	margin: 0px;
 	padding: 0px;
+	height: 100%;
 }
 
 
@@ -22,8 +23,14 @@ div#stats {
 	
 }
 
-#content { 
+#container {
+	min-height: 100%;
 	margin: 0px 75px 0px 75px;
+	background: rgb(255, 250, 240);
+}
+
+#content { 
+	padding: 10px 40px 40px 40px;
 }
 
 #stats p {
@@ -46,11 +53,11 @@ h1 {
 	font-size: 30pt;
 	text-shadow: -1px -1px 1px #555;
 	margin: 0px;
-	padding: 15px 0px 15px 75px;
+	padding: 15px 0px 15px 115px;
 }
 
 #header {
-	margin-top: 0px;
+	margin: 0px -75px 0px -75px;
 	padding: 0px;
 	height: 75px;
 	color: #eeeeec;
@@ -64,7 +71,7 @@ h1 {
 	line-height: 75px;
 	margin: 0px;
 	padding: 0px;
-	margin: 0px 75px 0px 0px;
+	margin: 0px 115px 0px 0px;
 }
 
 #header li
@@ -74,7 +81,7 @@ h1 {
 	height: 100%;
 	font-weight: normal;
 	width: 100px;
-	text-align: center;
+	text-align: right;
 	font-size: 13pt;
 	overflow: hidden;
 	background-image: url('/pixels/button.png')
