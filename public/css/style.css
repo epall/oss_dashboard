@@ -4,15 +4,11 @@ html {
 	color: #2e3436;
 }
 
-body {
-	margin: 25px 50px 0px 50px;
+html, body {
+	margin: 0px;
+	padding: 0px;
 }
 
-table {
-	border: 1px solid black;
-	font-size: small;
-	width: 100%;
-}
 
 a {
 	color: #2e3426;
@@ -20,22 +16,46 @@ a {
 
 p {
 	text-align: justify;
-	width: 55% !important;
 }
 
 div#stats {
-	width: 40% !important;
-	margin-left: 30px !important;
+	
+}
+
+#content { 
+	margin: 0px 75px 0px 75px;
 }
 
 #stats p {
 	width: 100% !important;
 }
 
+.title {
+	
+}
+
+.time {
+	color: #555753;
+	font-size: smaller;
+	font-style: italic;
+}
+
 h1 {
-	font-size: 25pt;
-	border-bottom: 1px dashed black;
-	text-shadow: #FFF -2px -2px 1px;
+	margin-top: 0px;
+	font-weight: normal;
+	font-size: 30pt;
+	height: 45px;
+	color: #eeeeec;
+	text-shadow: -1px -1px 1px #555;
+	padding: 15px 0px 15px 30px;
+	background-image:url("/pixels/header.png");
+}
+
+table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-size: small;
+	width: 100%;
 }
 
 th {
@@ -53,8 +73,10 @@ th {
 td {
 	text-align: left;
 	border: none;
-	border-bottom: 1px solid black;
+	border-bottom: 1px dotted black;
 	margin: 0px;
+	padding: 5px 5px 3px 5px;
+	border-left: 1px dotted black;
 }
 
 tr {

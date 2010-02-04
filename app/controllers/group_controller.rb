@@ -1,6 +1,4 @@
 class GroupController < ApplicationController
-  layout 'application', :except => 'show'
-
   def index
     # TODO actually support listing of groups
     redirect_to :action => 'show', :id => Group.first.id

@@ -1,44 +1,39 @@
-<html>
-    <head>
-      <title><%= @group.name %> Dashboard</title>
-        <link rel="stylesheet" type="text/css" href="/css/style.css"
-    </head>
-    <body>
-        <h1><%= @group.name %> Dashboard</h1>
-        <div class="menu">
-          <%= link_to 'Add project', :controller => :project, :action => :new %> |
-          <%= link_to 'Blog aggregate', :controller => :events %> |
-          <%= link_to 'Update', :controller => :project, :action => :fetch %> |
-          <%= link_to 'Admin', :action => :admin, :id => @group.id %>
-        </div>
-        <div id="description">
-          <div id="stats">
-            <p>Of the <b><%= @stats['num_projects'] %></b> projects active in <%= @group.name %> this semester,</p>
-            <ul>
-              <li><b><%= @stats['all_three'] %></b> have posted a blog, source code, and a wiki</li>
-              <li><b><%= @stats['last_week'] %></b> have updated in the last week</li>
-              <li><b><%= @stats['none'] %></b> have not posted anything yet</li>
-            </ul>
-          </div>
-          <p><%= @group.description %></p>
-        </div>
-        <table border="1">
-            <tr>
-                <% Project.display_columns.map{|name| name.gsub('_', ' ').capitalize}.each do |col| %>
-                    <th><%= col %></th>
-                <% end %>
-            </tr>
+<% @title = @group.name + " Dashboard" %>
+<div class="menu">
+  <%= link_to 'Add project', :controller => :project, :action => :new %> |
+  <%= link_to 'Blog aggregate', :controller => :events %> |
+  <%= link_to 'Update', :controller => :project, :action => :fetch %> |
+  <%= link_to 'Admin', :action => :admin, :id => @group.id %>
+</div>
+<div id="description">
+  <div id="stats">
+    <p>Of the <strong><%= @stats['num_projects'] %></strong> projects active in <%= @group.name %> this semester,</p>
+    <ul>
+      <li><%= has_have @stats['all_three'] %> posted a blog, source code, and a wiki</li>
+      <li><%= has_have @stats['last_week'] %> updated in the last week</li>
+      <% if @stats['none'] > 0 %>
+        <li><%= has_have @stats['none'] %> not posted anything yet</li>
+      <% end %>
+    </ul>
+  </div>
+  <p><%= @group.description %></p>
+</div>
+<table border="1">
+    <tr>
+        <% Project.display_columns.map{|name| name.gsub('_', ' ').capitalize}.each do |col| %>
+            <th><%= col %></th>
+        <% end %>
+    </tr>
 
-            <% @projects.each do |project| %>
-                <tr>
-                    <% Project.display_columns.each do |col| %>
-                      <td class="<%= value_class(col, project) %>"
-                        style="<%= value_style(col, project)%>">
-                        <%= column_contents(col, project) %>
-                      </td>
-                    <% end %>
-                </tr>
+    <% @projects.each do |project| %>
+        <tr>
+            <% Project.display_columns.each do |col| %>
+              <td class="<%= value_class(col, project) %>"
+                style="<%= value_style(col, project)%>">
+                <%= column_contents(col, project) %>
+              </td>
             <% end %>
-        </table>
-    </body>
-</html>
+        </tr>
+    <% end %>
+</table>
+

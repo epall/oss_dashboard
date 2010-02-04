@@ -7,7 +7,7 @@ module ProjectHelper
     if column == 'blog'
       text = project.last_blog_entry.title rescue 'No updates'
       text = truncate(text, :length => 50)
-      "<a href=\"#{value}\">#{text}</a> (#{project.last_update(column)})"
+      "<div class=\"title\"><a href=\"#{value}\">#{text}</a></div><div class=\"time\">#{project.last_update(column)}</div>"
     elsif column == 'contributors'
       value.gsub(',', "\n<br>\n")
     elsif column == 'source_code'
@@ -34,9 +34,8 @@ module ProjectHelper
       text.gsub!(/Changeset \[[a-f0-9]+\]: /, '')
       text.gsub!(/Revision .*: /, '')
       text = truncate(text, :length => 70)
-      last_update = '('+project.last_update('source_code')+')'
-      last_update = '' if text == 'No updates'
-      "<a href=\"#{project.source_code}\">#{text}</a> #{last_update}"
+      last_update = project.last_update('source_code')
+      "<div class=\"title\"><a href=\"#{project.source_code}\">#{text}</a></div><div class=\"time\">#{last_update}</div>"
     else
       "<a href=\"#{project.source_code}\">Yes</a>"
     end
@@ -74,5 +73,9 @@ module ProjectHelper
 
   def color_from_age(days_old)
     return Color::HSL.new(100 - days_old, 53, 70).html()
+  end
+  
+  def has_have(num)
+    return "<strong>" + num.to_s() + "</strong>" + (num.to_i == 1 ? " has " : " have ")
   end
 end
