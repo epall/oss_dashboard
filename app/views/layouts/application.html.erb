@@ -19,8 +19,12 @@
         display: block;
       }
     </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
   <body>
-    <%= yield %>
+    <h1><%= @title %></h1>
+    <div id="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
