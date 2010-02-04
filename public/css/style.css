@@ -142,14 +142,13 @@ td.red {
 	background-color: #db8a8a;
 }
 
-#description > p {
-	width:60%;
+#description p {
+	margin-right: 340px;
 }
 
 #stats {
 	float: right;
-	width: 40%;
-	margin-left: 5em;
+	width: 320px;
 }
 
 #stats p {
@@ -179,8 +178,9 @@ margin:0px;
 	padding: 10px;
 	background: rgb(220, 220, 230);
 	border: 1px dotted rgb(200, 200, 210);
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 }
 
 .post_date {
@@ -219,6 +219,13 @@ h3 {
 	padding: 0px;
 	font-size: 20pt;
 	margin: 20px 200px 10px 0px;
+}
+
+h3 a {
+	text-decoration: none;
+}
+h3 a:hover {
+	text-decoration: underline;
 }
 
 hr {
