@@ -6,4 +6,7 @@ class EventsController < ApplicationController
       format.atom
     end
   end
+  def full
+    @event = Event.find(params[:id]) rescue redirect_to(:action => :index) if @event == nil
+  end
 end

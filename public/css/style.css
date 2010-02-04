@@ -170,6 +170,10 @@ margin:0px;
 	line-height: 140%;
 }
 
+.post_summary img {
+	max-width: 100%;
+}
+
 .post_details {
 	float:right;
 	text-align: left;

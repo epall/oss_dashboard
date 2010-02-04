@@ -1,4 +1,4 @@
-<% @title = "RCOS Blog Aggregate" -%>
+<% @title = "RCOS Dashboard" -%>
 <% content_for :head do %>
 <%= auto_discovery_link_tag(:atom, :format => :atom) %>
 <% end %>
@@ -9,7 +9,8 @@
       <%= event.summary || event.content %>
 	  <div class="post_readmore">
 		Read more at
-		<%= link_to event.project.name, event.permalink %>
+		<%= link_to event.project.name, event.permalink %> •
+		<%= link_to "RCOS Dashboard", :action => 'full', :id => event.id %>
 	  </div>
     </div>
     <div class="post_details">
