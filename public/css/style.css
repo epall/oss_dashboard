@@ -41,14 +41,53 @@ div#stats {
 }
 
 h1 {
-	margin-top: 0px;
+	float: left;
 	font-weight: normal;
 	font-size: 30pt;
-	height: 45px;
-	color: #eeeeec;
 	text-shadow: -1px -1px 1px #555;
+	margin: 0px;
 	padding: 15px 0px 15px 75px;
+}
+
+#header {
+	margin-top: 0px;
+	padding: 0px;
+	height: 75px;
+	color: #eeeeec;
 	background-image:url("/pixels/header.png");
+}
+
+#header ul
+{
+	float: right;
+	height: 75px;
+	line-height: 75px;
+	margin: 0px;
+	padding: 0px;
+	margin: 0px 75px 0px 0px;
+}
+
+#header li
+{
+	list-style-type: none;
+	float: right;
+	height: 100%;
+	font-weight: normal;
+	width: 100px;
+	text-align: center;
+	font-size: 13pt;
+	overflow: hidden;
+	background-image: url('/pixels/button.png')
+}
+
+#header li a {
+	color: #eeeeec;
+	text-decoration: none;
+}
+
+#header li a:hover {
+	color: white;
+	text-decoration: underline;
 }
 
 table {

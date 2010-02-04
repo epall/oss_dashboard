@@ -22,7 +22,13 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
   <body>
-    <h1><%= @title %></h1>
+    <div id="header">
+      <h1><%= @title %></h1>
+      <ul>
+        <li><%= link_to("Blogs", :controller => 'events')%></li>
+        <li><%= link_to("Projects", :controller => 'group')%></li>
+      </ul>
+    </div>
     <div id="content">
       <%= yield %>
     </div>
