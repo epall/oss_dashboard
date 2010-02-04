@@ -94,9 +94,9 @@ class Project < ActiveRecord::Base
   def last_update(column)
     case column
     when 'blog'
-      return events.blog.last.created_at.strftime('%A, %B %d') rescue "No updates"
+      return events.blog.last.created_at.strftime('%A, %B %d') rescue ''
     when 'source_code'
-      return events.code.last.created_at.strftime('%A, %B %d') rescue "No updates"
+      return events.code.last.created_at.strftime('%A, %B %d') rescue ''
     end
   end
 
