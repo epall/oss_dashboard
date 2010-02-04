@@ -80,7 +80,7 @@ h1 {
 	height: 100%;
 	font-weight: normal;
 	width: 100px;
-	text-align: right;
+	text-align: center;
 	font-size: 13pt;
 	overflow: hidden;
 	background-image: url('/pixels/button.png')
@@ -167,30 +167,41 @@ margin:0px;
 .post_summary {
 	float: left;
 	text-align: justify;
-	margin-right: 300px;
+	margin-right: 200px;
+	line-height: 140%;
 }
+
 .post_details {
 	float:right;
-	text-align: center;
-	width: 200px;
-	margin-left: -225px;
-	
+	text-align: left;
+	width: 153px;
+	margin: 0px 0px 0px -175px;
+	padding: 10px;
+	background: rgb(220, 220, 230);
+	border: 1px dotted rgb(200, 200, 210);
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
+
 .post_date {
 	font-size: 40pt;
 	font-weight: bold;
 }
+
 .post_month {
 	font-size: 20pt;
 	margin-top: -10px;
 }
+
 .post_project {
 	font-weight: light;
-	font-size: small;
+	font-size: 9pt;
 }
 
 h3 {
 	padding: 0px;
+	font-size: 20pt;
+	margin: 20px 200px 10px 0px;
 }
 
 hr {
@@ -199,6 +210,6 @@ hr {
 	height: 1px;
 	padding-top: 25px;
 	border: none;
-	border-bottom: 1px dashed black;
+	border-bottom: 1px dashed rgb(200, 200, 210);
 	margin-bottom: 25px;
 }
