@@ -4,9 +4,18 @@
 <% end %>
 <% @events.each do |event| -%>
   <div class="article">
-    <h3><%= link_to event.project.name + ' | ' + event.title, event.permalink %></h3>
-    <div class="datestamp">Posted on <%= event.created_at.to_formatted_s(:long) %></div>
-    <p><%= event.summary || event.content %></p>
+    <div class="post_summary">
+      <h3><%= link_to event.title, event.permalink %></h3>
+      <%= event.summary || event.content %>
+    </div>
+    <div class="post_details">
+      <div class="post_datestamp">
+        <div class="post_date"><%= event.created_at.strftime('%d') %></div>
+        <div class="post_month"><%= event.created_at.strftime('%B') %></div>
+      </div>
+      <div class="post_project"><%= event.project.name %></div>
+    </div>
+    <hr />
   </div>
 <% end -%>
 <%= will_paginate @events, :previous_label => '« Newer', :next_label => 'Older »',

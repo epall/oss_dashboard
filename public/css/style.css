@@ -118,3 +118,42 @@ td.red {
 .edit_link form {
 margin:0px;
 }
+
+.post_summary {
+	float: left;
+	text-align: justify;
+	margin-right: 250px;
+}
+.post_details {
+	float:right;
+	text-align: center;
+	width: 225px;
+	margin-left: -225px;
+	
+}
+.post_date {
+	font-size: 40pt;
+	font-weight: bold;
+}
+.post_month {
+	font-size: 20pt;
+	margin-top: -10px;
+}
+.post_project {
+	font-weight: light;
+	font-size: small;
+}
+
+h3 {
+	padding: 0px;
+}
+
+hr {
+	clear: both;
+	width: 100px;
+	height: 1px;
+	padding-top: 25px;
+	border: none;
+	border-bottom: 1px dashed black;
+	margin-bottom: 25px;
+}
