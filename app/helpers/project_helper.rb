@@ -20,7 +20,7 @@ module ProjectHelper
         name = "<a href=\"#{project.website}\">#{value}</a>"
       end
       name
-    elsif value.is_a? String and value.match(/http/)
+    elsif value.is_a? String and value.match(/http/) # wiki
       "<a href=\"#{value}\">Yes</a>"
     else
       value
@@ -53,22 +53,17 @@ module ProjectHelper
 
   def value_class(col_name, project)
     value = project[col_name]
-    if ['name', 'contributors', 'website'].include? col_name
-      return col_name
-    else
-      return 'red' if value.nil?
-      if col_name == 'blog'
-        return ''
-      elsif col_name == 'source_code'
-        if project.source_code_feed
-          return ''
-        else
-          return 'green'
-        end
-      else
-        return 'green'
+    ret = col_name + ' '
+    ret += 'red' if value.nil?
+
+    if col_name == 'source_code'
+      if !project.source_code_feed
+        ret += 'green'
       end
+    elsif col_name == 'wiki'
+      ret += 'green' if !value.nil?
     end
+    return ret
   end
 
   def color_from_age(days_old)

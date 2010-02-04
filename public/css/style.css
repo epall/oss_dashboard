@@ -52,20 +52,19 @@ h1 {
 }
 
 table {
-	border: 1px solid black;
 	border-collapse: collapse;
 	font-size: small;
 	width: 100%;
 }
 
 th {
-	font-weight: bold;
+	font-weight: normal;
+	text-align: center;
 	font-size: large;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-	/*padding-top: 5px;
-	padding-bottom: 5px;*/
-	background: #2e3426;
+	padding: 3px 0px 3px 0px;
+	background: black;
+	background-image: url("/pixels/tableheader.png");
+	background-repeat: repeat-x;
 	color: #eeeeec;
 	border: 0px;
 }
@@ -73,23 +72,29 @@ th {
 td {
 	text-align: left;
 	border: none;
-	border-bottom: 1px dotted black;
+	border-bottom: 1px solid black;
 	margin: 0px;
 	padding: 5px 5px 3px 5px;
-	border-left: 1px dotted black;
+	border-left: 1px solid black;
+	min-width: 30px;
+}
+
+td.wiki {
+	text-align: center;
 }
 
 tr {
 	padding: 0px;
-	margin: 0px;
-}
-
-td.red {
-	background-color: red;
+	margin: 0px -1px 0px 0px;
+	border-right: 1px solid black;
 }
 
 td.green {
-	background-color: green;
+	background-color: #a5db8a;
+}
+
+td.red {
+	background-color: #db8a8a;
 }
 
 #description > p {
