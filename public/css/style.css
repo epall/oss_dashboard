@@ -1,7 +1,7 @@
 html { 
 	font-family: "Myriad Pro", Calibri, "Trebuchet MS", Helvetica, Arial, sans-serif;
-	background: #555753;
 	color: #2e3436;
+	background: rgb(255, 250, 240);
 }
 
 html, body {
@@ -26,7 +26,6 @@ div#stats {
 #container {
 	min-height: 100%;
 	margin: 0px 75px 0px 75px;
-	background: rgb(255, 250, 240);
 }
 
 #content { 
@@ -168,12 +167,12 @@ margin:0px;
 .post_summary {
 	float: left;
 	text-align: justify;
-	margin-right: 250px;
+	margin-right: 300px;
 }
 .post_details {
 	float:right;
 	text-align: center;
-	width: 225px;
+	width: 200px;
 	margin-left: -225px;
 	
 }
