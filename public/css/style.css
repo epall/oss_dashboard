@@ -198,6 +198,23 @@ margin:0px;
 	font-size: 9pt;
 }
 
+.post_readmore {
+	font-weight: light;
+	font-size: 9pt;
+	font-style: italic;
+	color: #888a85;
+	padding-top: 5px;
+}
+
+.post_readmore a {
+	text-decoration: none;
+	color: #888a85;
+}
+.post_readmore a:hover {
+	text-decoration: underline;
+	color: black;
+}
+
 h3 {
 	padding: 0px;
 	font-size: 20pt;

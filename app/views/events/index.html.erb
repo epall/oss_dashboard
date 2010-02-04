@@ -7,6 +7,10 @@
 	<h3><%= link_to event.title, event.permalink %></h3>
     <div class="post_summary">
       <%= event.summary || event.content %>
+	  <div class="post_readmore">
+		Read more at
+		<%= link_to event.project.name, event.permalink %>
+	  </div>
     </div>
     <div class="post_details">
       <div class="post_datestamp">
