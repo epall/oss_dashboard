@@ -1,7 +1,4 @@
 class ProjectController < ApplicationController
-  layout 'application', :except => :index
-  layout 'simple', :only => [:new, :create]
-
   def fetch
     Project.fetch
     redirect_to :controller => 'group', :action => 'index'

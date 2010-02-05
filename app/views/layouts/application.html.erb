@@ -9,6 +9,7 @@
       google.load("jquery", "1");
       google.load("jqueryui", "1");
     </script>
+	<%= yield :head %>
 
     <style type="text/css">
       #hosting-container p {
@@ -21,7 +22,7 @@
     </style>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
-  <body>
+  <body <%= yield :onload %>>
     <div id="container">
       <div id="header">
         <h1><%= @title %></h1>
