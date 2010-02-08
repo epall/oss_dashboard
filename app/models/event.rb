@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
       e.entry_type = type
       e.title = raw_article.title
       e.summary = raw_article.summary
-      e.content = raw_article.content
+      e.content = raw_article.content || e.summary
       e.created_at = raw_article.published
       e.updated_at = raw_article.updated
       e.permalink = raw_article.url
