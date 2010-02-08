@@ -1,11 +1,17 @@
-<h1>Group admin</h1>
+<% @title = 'Group admin' %>
 <table cellspacing="1" border="1" cellpadding="5">
+  <tr>
+    <th>Project</th>
+    <th>Contributors</th>
+    <th>Actions</th>
   <% @group.projects.each do |project| -%>
     <tr>
       <td><%= project.name %></td>
+      <td><%= project.contributors %></td>
       <td>
         <%= link_to 'Edit', :controller => :project, :action => :edit, :id => project.id %>
-        <%= link_to("Approve", approve_url(project)) unless project.approved? %></td>
+        <%= link_to("Approve", approve_url(project)) unless project.approved? %>
+      </td>
     </tr>
   <% end -%>
 </table>
