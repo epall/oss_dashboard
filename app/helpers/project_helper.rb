@@ -65,7 +65,7 @@ module ProjectHelper
   end
 
   def color_from_age(days_old)
-    return Color::HSL.new(100 - days_old, 53, 70).html()
+    return Color::HSL.new([120 - days_old*4.3, 0].max, 60, 70).html()
   end
   
   def has_have(num)
