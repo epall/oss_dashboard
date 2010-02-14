@@ -20,11 +20,9 @@ class Project < ActiveRecord::Base
   end
 
   def age
-    score = 0
-    score += 1000 unless source_code
-    score += 1000 unless blog
-    score += 1000 unless wiki
-    score += [entry_age(last_blog_entry), entry_age(last_source_code_entry)].compact.min
+    s = entry_age(last_source_code_entry)
+    b = entry_age(last_blog_entry)
+    score = s * s + s * b + b * b + s
     return score
   end
 
