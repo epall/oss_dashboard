@@ -25,6 +25,22 @@ class Project < ActiveRecord::Base
     score = s * s + s * b + b * b + s
     return score
   end
+  
+  def blogs_this_week
+    events.blog.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
+  end
+  
+  def commits_this_week
+    events.code.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
+  end
+  
+  def activity_this_week
+    events.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
+  end
+  
+  def total_activity
+    events.count
+  end
 
   def blog_parser
     return nil if blog_feed.nil?
