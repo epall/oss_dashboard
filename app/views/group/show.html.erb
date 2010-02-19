@@ -9,8 +9,8 @@
   <div id="stats">
     <p>Of the <strong><%= @stats['num_projects'] %></strong> projects active in <%= @group.name %> this semester,</p>
     <ul>
-      <li><%= has_have @stats['all_three'] %> posted a blog, source code, and a wiki</li>
       <li><%= has_have @stats['last_week'] %> updated in the last week</li>
+      <li><%= @stats['members'] %> contributors are represented</li>
       <% if @stats['none'] > 0 %>
         <li><%= has_have @stats['none'] %> not posted anything yet</li>
       <% end %>
