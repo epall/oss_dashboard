@@ -41,6 +41,10 @@ class Project < ActiveRecord::Base
   def total_activity
     events.count
   end
+  
+  def number_of_contributors
+    contributors.count(',')+1
+  end
 
   def blog_parser
     return nil if blog_feed.nil?
