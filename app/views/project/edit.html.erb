@@ -1,29 +1,5 @@
-<script type="text/javascript">
-  google.setOnLoadCallback(function(){
-      $('select#hosting').change(function(){
-        $('#hosting-container p').hide();
-        $('#hosting-container input').val('');
-        switch($(this).val()){
-        case 'Redmine':
-        $('#redmine-url').show();
-        break;
-        case 'GitHub':
-        $('#github-project').show();
-        break;
-        case 'Google Code':
-        $('#googlecode-project').show();
-        break;
-        }
-        });
-      });
-</script>
-<h1>
-  <% if !@project.name %>
-    New Project
-  <% else %>
-    Editing <%= @project.name %>
-  <% end %>
-</h1>
+<% @title = 'Editing ' + @project.name %>
+
 <% if flash[:notice] %>
   <div class="notice" style="padding:5px; background-color:#FFAAAA; border: 2px solid red"><%= flash[:notice] %></div>
 <% end %>
@@ -34,43 +10,36 @@
   <%= f.text_field :name %>
   </p>
   <p>
-  <%= f.label :website %>:
-  <%= f.text_field :website, :size => 50 %>
+  <%= f.label :contributors %>:
+  <%= f.text_field :contributors %>
   </p>
   <p>
   <%= f.label :blog, "Blog URL" %>:
-  <%= f.text_field :blog, :size => 80 %>
+  <%= f.text_field :blog, :size => 50 %>
   </p>
   <p>
-  <%= label_tag "Hosting type" %>:
-  <%= select_tag 'hosting', options_for_select(%w[Redmine GitHub Google\ Code]) %>
+  <%= f.label :blog_feed %>:
+  <%= f.text_field :blog_feed, :size => 50 %>
   </p>
-  <div id="hosting-container">
-    <p id="redmine-url">
-    <%= label_tag "Redmine Home" %>:
-    <%= text_field_tag 'redmine', '', :size => 80 %>
-    </p>
-    <p id="github-project">
-    <%= label_tag "GitHub project name (e.g. epall/tracks)" %>:
-    <%= text_field_tag 'github', '', :size => 30 %>
-    </p>
-    <p id="googlecode-project">
-    <%= label_tag "Google Code project name (e.g. dplms)" %>:
-    <%= text_field_tag 'googlecode', '', :size => 20 %>
-    </p>
-    <p id="code-manual">
-    <%= f.label :source_code, "Source Code URL" %>:
-    <%= f.text_field :source_code, :size => 80 %>
-    </p>
-  </div>
+  <p>
+  <%= f.label :source_code %>:
+  <%= f.text_field :source_code, :size => 50 %>
+  </p>
+  <p>
+  <%= f.label :source_code_feed %>:
+  <%= f.text_field :source_code_feed, :size => 50 %>
+  </p>
+  <%= f.label :website %>:
+  <%= f.text_field :website, :size => 50 %>
+  </p>
   <p>
   <%= f.label :wiki %>:
   <%= f.text_field :wiki, :size => 80 %>
   </p>
 
   <p>
-  <%= label_tag 'admin_password', 'Administration Password:' %>
-  <%= text_field_tag 'admin_password' %>
+  <%= label_tag 'password', 'Password:' %>
+  <%= text_field_tag 'password' %>
   </p>
 
   <%= f.submit 'Save' %>

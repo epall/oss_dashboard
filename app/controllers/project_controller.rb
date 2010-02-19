@@ -1,6 +1,5 @@
 class ProjectController < ApplicationController
-  layout 'application', :except => :index
-  layout 'simple', :only => [:new, :create]
+  layout 'application', :except => [:new, :create]
 
   def fetch
     Project.fetch
@@ -54,32 +53,16 @@ class ProjectController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if @project.group.admin_password != params[:admin_password]
-      flash[:notice] = "Access denied"
+    if @project.group.admin_password != params[:password] && @project.password != params[:password]
+      flash[:notice] = "Incorrect password"
       redirect_to :back
       return
     end
 
     @project.update_attributes!(params[:project])
+    # @project.save!
 
-    case params[:hosting]
-    when 'Redmine'
-      @project.source_code = params['redmine'].sub('projects/show', 'repositories/show')
-      @project.source_code_feed = @project.source_code.sub('repositories/show', 'repositories/revisions')+'?format=atom'
-    when 'GitHub'
-      member, project = params['github'].split('/')
-      @project.source_code = "http://github.com/#{member}/#{project}"
-      @project.source_code_feed = "http://github.com/feeds/#{member}/commits/#{project}/master"
-    when 'Google Code'
-      project_name = params['googlecode']
-      @project.source_code = "http://code.google.com/p/#{project_name}/source/browse/"
-      @project.source_code_feed = "http://code.google.com/feeds/p/#{project_name}/svnchanges/basic"
-    else
-      raise "Unrecognized hosting type"
-    end
-    @project.save!
-
-    redirect_to :action => :index
+    redirect_to :controller => 'group', :action => 'show', :id => @project.group
   end
 
   def approve
@@ -96,6 +79,7 @@ class ProjectController < ApplicationController
   end
 
   def new
+    render :layout => 'simple'
   end
   
   def edit
