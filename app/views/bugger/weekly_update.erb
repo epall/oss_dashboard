@@ -1,16 +1,18 @@
 Hello, <%= @group.name %>, and welcome to this week's Dashboard Update!
 
-The most active project this week was <%= @most_active.name %>, with 
+The most active project over the past 7 days was <%= @most_active.name %>, with 
 <%= @most_active.blogs_this_week %> blog posts and <%= @most_active.commits_this_week %> source code commits.
-
-The least active project this week was <%= @least_active.name %>, with 
-<%= @least_active.blogs_this_week %> blog posts and <%= @least_active.commits_this_week %> source code commits.
 
 The top three most active projects overall are
 <%= @top_active.map(&:name).to_sentence %>.
 
-The bottom three least active projects overall are
-<%= @bottom_active.map(&:name).to_sentence %>.
+Blog posts this week:
+
+<% @blogs.each do |entry| -%>
+<%= entry.title %>, from the <%= entry.project.name %> project
+Contributors: <%= entry.project.contributors %>
+
+<% end -%>
 
 For more details, head on over to 
 <%= url_for :host => 'dashboard.rcos.cs.rpi.edu', :controller => 'group', :action => 'show', :id => @group.id %>
