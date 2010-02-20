@@ -1,0 +1,28 @@
+<h1>Editing personal_blog</h1>
+
+<% form_for(@personal_blog) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :weblink %><br />
+    <%= f.text_field :weblink %>
+  </p>
+  <p>
+    <%= f.label :feed %><br />
+    <%= f.text_field :feed %>
+  </p>
+  <p>
+    <%= f.label :group_id %><br />
+    <%= f.text_field :group_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @personal_blog %> |
+<%= link_to 'Back', personal_blogs_path %>

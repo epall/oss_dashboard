@@ -1,0 +1,6 @@
+<% @title = "Personal blog added" %>
+<p>Your personal blog, <%= @personal_blog.name %>, has been successfully added.
+  It will show up on the <%= link_to 'blog aggregate', :controller => :events %> once it has 
+  been approved by the administrator.</p>
+
+<%= link_to 'Home', showgroup_url(@personal_blog.group) %>

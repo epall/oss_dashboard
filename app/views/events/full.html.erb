@@ -8,7 +8,7 @@
 		<%= @event.content %>
 		<div class="post_readmore">
 			Read this post at the 
-			<%= link_to @event.project.name + " website", @event.permalink %>.
+			<%= link_to @event.parent.name + " website", @event.permalink %>.
 		</div>
 	</div>
 	<div class="post_details">
@@ -16,7 +16,7 @@
 			<div class="post_date"><%= day(@event.created_at) %></div>
 			<div class="post_month"><%= @event.created_at.strftime('%B') %></div>
 		</div>
-		<div class="post_project"><%= @event.project.name %></div>
+		<div class="post_project"><%= @event.parent.name %></div>
 	</div>
 	<hr />
 	<%= link_to "Back to RCOS Blogs", :action => :index %>

@@ -1,0 +1,2 @@
+module PersonalBlogsHelper
+end

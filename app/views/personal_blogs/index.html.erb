@@ -1,0 +1,26 @@
+<h1>Listing personal_blogs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Weblink</th>
+    <th>Feed</th>
+    <th>Group</th>
+  </tr>
+
+<% @personal_blogs.each do |personal_blog| %>
+  <tr>
+    <td><%=h personal_blog.name %></td>
+    <td><%=h personal_blog.weblink %></td>
+    <td><%=h personal_blog.feed %></td>
+    <td><%=h personal_blog.group_id %></td>
+    <td><%= link_to 'Show', personal_blog %></td>
+    <td><%= link_to 'Edit', edit_personal_blog_path(personal_blog) %></td>
+    <td><%= link_to 'Destroy', personal_blog, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New personal_blog', new_personal_blog_path %>

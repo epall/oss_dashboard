@@ -1,8 +1,9 @@
 <% @title = @group.name + " Dashboard" %>
 <div class="menu">
   <%= link_to 'Add project', :controller => :project, :action => :new %> |
+  <%= link_to 'Add personal blog', :controller => :personal_blogs, :action => :new %> |
   <%= link_to 'Blog aggregate', :controller => :events %> |
-  <%= link_to 'Update', :controller => :project, :action => :fetch %> |
+  <%= link_to 'Update', :action => :fetch, :id => @group.id %> |
   <%= link_to 'Admin', :action => :admin, :id => @group.id %>
 </div>
 <div id="description">

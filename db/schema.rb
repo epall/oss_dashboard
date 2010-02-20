@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100219163347) do
+ActiveRecord::Schema.define(:version => 20100220212251) do
 
   create_table "events", :force => true do |t|
     t.integer  "project_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20100219163347) do
     t.text     "summary"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "personal_blog_id"
   end
 
   create_table "groups", :force => true do |t|
@@ -30,6 +31,18 @@ ActiveRecord::Schema.define(:version => 20100219163347) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mailing_list"
+  end
+
+  create_table "personal_blogs", :force => true do |t|
+    t.string   "name"
+    t.string   "weblink"
+    t.string   "feed"
+    t.string   "etag"
+    t.datetime "last_modified"
+    t.boolean  "approved",      :default => false
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|

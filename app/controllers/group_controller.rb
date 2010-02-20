@@ -21,4 +21,10 @@ class GroupController < ApplicationController
   def admin
     @group = Group.find(params[:id], :include => [:projects])
   end
+  
+  def fetch
+    @group = Group.find(params[:id])
+    @group.fetch
+    redirect_to :action => 'show', :id => params[:id]
+  end
 end

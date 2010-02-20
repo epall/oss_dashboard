@@ -1,4 +1,5 @@
 <% @title = 'Group admin' %>
+<h2>Projects</h2>
 <table cellspacing="1" border="1" cellpadding="5">
   <tr>
     <th>Project</th>
@@ -11,6 +12,25 @@
       <td>
         <%= link_to 'Edit', :controller => :project, :action => :edit, :id => project.id %>
         <%= link_to("Approve", approve_url(project)) unless project.approved? %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+<h2>Personal blogs</h2>
+<table cellspacing="1" border="1" cellpadding="5">
+  <tr>
+    <th>Name</th>
+    <th>Web URL</th>
+    <th>Feed URL</th>
+    <th>Actions</th>
+  <% @group.personal_blogs.each do |blog| -%>
+    <tr>
+      <td><%= blog.name %></td>
+      <td><%= blog.weblink %></td>
+      <td><%= blog.feed %></td>
+      <td>
+        <%= link_to 'Edit', :controller => :personal_blogs, :action => :edit, :id => blog.id %>
+        <%= link_to("Approve", :controller => :personal_blogs, :action => :approve, :id => blog.id) unless blog.approved? %>
       </td>
     </tr>
   <% end -%>
