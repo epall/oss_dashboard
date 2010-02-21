@@ -9,7 +9,6 @@ class PersonalBlog < ActiveRecord::Base
     feed_objects = [self.feed_parser]
     feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 45})
     feed_cache = [feed_cache] unless feed_cache.is_a? Array
-    expire_page :controller => 'events', :action => 'index'
     self.update_from_feed(feed_cache)
   end
 

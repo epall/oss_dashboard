@@ -7,6 +7,13 @@ class Project < ActiveRecord::Base
   def self.display_columns
     ["name", "contributors", "blog", "source_code", "wiki"]
   end
+  
+  def fetch
+    feed_objects = [self.blog_parser,self.source_code_parser].compact
+    feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 45})
+    feed_cache = [feed_cache] unless feed_cache.is_a? Array
+    self.update_from_feed(feed_cache)
+  end
 
   def age
     s = entry_age(last_source_code_entry)
