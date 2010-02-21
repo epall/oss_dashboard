@@ -48,7 +48,12 @@ class ProjectController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if @project.group.admin_password != params[:password] && @project.password != params[:password]
+    session[:admin_for_groups] ||= []
+    if @project.group.admin_password == params[:password]
+      session[:admin_for_groups] << @project.group.id
+    end
+    
+    unless session[:admin_for_groups].include?(@project.group.id) or @project.password == params[:password]
       flash[:notice] = "Incorrect password"
       redirect_to :back
       return
