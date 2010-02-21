@@ -5,7 +5,8 @@ class ProjectController < ApplicationController
     @project = Project.new
     @project.name = params[:name]
     @project.contributors = params[:contributors]
-    @project.group = Group.first # TODO generalize
+    @project.group = Group.last # TODO generalize
+    @project.description = params[:description]
     
     if not params[:github].empty?
       @project.blog = params[:blog_url]
