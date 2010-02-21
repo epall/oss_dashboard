@@ -1,11 +1,6 @@
 class ProjectController < ApplicationController
   layout 'application', :except => [:new, :create]
 
-  def fetch
-    Project.fetch
-    redirect_to :controller => 'group', :action => 'index'
-  end
-
   def create
     @project = Project.new
     @project.name = params[:name]

@@ -1,4 +1,6 @@
 class GroupController < ApplicationController
+  caches_page :show
+  
   def index
     # TODO actually support listing of groups
     redirect_to :action => 'show', :id => Group.first.id
@@ -25,6 +27,9 @@ class GroupController < ApplicationController
   def fetch
     @group = Group.find(params[:id])
     @group.fetch
+    expire_page :action => 'show', :id => @group.id
+    expire_page :controller => 'events', :action => 'index'
+    
     redirect_to :action => 'show', :id => params[:id]
   end
 end
