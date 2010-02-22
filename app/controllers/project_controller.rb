@@ -78,6 +78,22 @@ class ProjectController < ApplicationController
       end
     end
   end
+  
+  def add_presentation
+    @project = Project.find(params[:id], :include => [:group])
+    if request.post?
+      if session[:admin_for_groups] and session[:admin_for_groups].include?(@project.group.id)
+        @project.presentation_count += 1
+        @project.save!
+        redirect_to admin_url(@project.group)
+      else
+        session[:attempted_url] = request.request_uri
+        redirect_to authenticate_url(@project.group.id)
+      end
+    else
+      redirect_to admin_url(@project.group)
+    end
+  end
 
   def new
     render :layout => 'simple'

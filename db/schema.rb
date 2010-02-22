@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100221230957) do
+ActiveRecord::Schema.define(:version => 20100222002236) do
 
   create_table "events", :force => true do |t|
     t.integer  "project_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20100221230957) do
     t.datetime "code_last_modified"
     t.integer  "group_id"
     t.text     "description"
+    t.integer  "presentation_count", :default => 0
   end
 
 end

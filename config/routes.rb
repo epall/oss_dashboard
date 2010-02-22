@@ -43,6 +43,9 @@ ActionController::Routing::Routes.draw do |map|
   #
   map.approve 'project/approve/:id', :controller => 'project', :action => 'approve'
   map.showgroup 'g/:id', :controller => 'group', :action => 'show'
+  
+  map.authenticate '/authenticate/:id', :controller => 'group', :action => 'authenticate'
+  map.admin '/admin/:id', :controller => 'group', :action => 'admin'
 
   map.root :controller => 'group'
   #map.resource :project

@@ -1,0 +1,25 @@
+<% content_for :head do %>
+<% if @next %>
+<script type="text/javascript" charset="utf-8">
+google.setOnLoadCallback(function(){
+  $('input#tryagain').click();
+});
+</script>
+<% end %>
+<% end %>
+<% @title = "Authenticate for #{@group.name}" %>
+<% if flash[:notice] %>
+  <div class="notice" style="padding:5px; background-color:#FFAAAA; border: 2px solid red"><%= flash[:notice] %></div>
+<% end %>
+<% form_tag do %>
+  <p>
+    <label for="admin_password">Admin password</label>
+    <input type="text" name="admin_password"></input>
+  <p>
+  <p>
+    <%= submit_tag "Authenticate" %>
+  </p>
+  <% end %>
+<div style="display:none">
+<%= button_to "Try again", session[:attempted_url], :id => "tryagain" %>
+</div>

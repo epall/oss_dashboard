@@ -43,4 +43,18 @@ class GroupController < ApplicationController
       project.blog_age > 14 || project.source_code_age > 14
     end
   end
+  
+  def authenticate
+    @group = Group.find(params[:id])
+    if request.post?
+      if params[:admin_password] == @group.admin_password
+        session[:admin_for_groups] ||= []
+        session[:admin_for_groups] << @group.id
+        @next = true
+      else
+        flash[:notice] = "Access denied"
+        redirect_to :back
+      end
+    end
+  end
 end
