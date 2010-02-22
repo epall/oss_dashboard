@@ -29,7 +29,11 @@ class GroupController < ApplicationController
     @group.fetch
     expire_page :action => 'show', :id => @group.id
     expire_page :controller => 'events', :action => 'index'
-    
     redirect_to :action => 'show', :id => params[:id]
+  end
+  
+  def listing
+    @group = Group.find(params[:id], :include => [:projects])
+    render :layout => false
   end
 end

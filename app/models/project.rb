@@ -22,6 +22,10 @@ class Project < ActiveRecord::Base
     return score
   end
   
+  def formatted_contributors
+    contributors.split(/, ?/).to_sentence
+  end
+  
   def blogs_this_week
     events.blog.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
   end

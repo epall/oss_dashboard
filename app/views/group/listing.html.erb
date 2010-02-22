@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<html>
+
+
+<head>
+  <title>RPI Center for Open Source Software</title>
+
+  <link rel=stylesheet href="http://rcos.rpi.edu/style.css" type="text/css" />
+  <style type="text/css" media="screen">
+  div.project {
+    margin-bottom:1em;
+  }
+
+  h4 {
+    font-size: inherit;
+    margin:0px;
+    margin-bottom:0.3em;
+    font-weight: normal;
+  }
+
+  h4 span.name {
+    font-weight: bold;
+  }
+  </style>
+  <script type='text/javascript' src='http://rcos.rpi.edu/prototype.js'></script>
+  <script type='text/javascript' src='http://rcos.rpi.edu/rico.js'></script>
+  <!--Javascript code to show project descriptions -->
+  <!--Continue to number p ids and the number the function passes in for this to work-->
+  <script language="Javascript">
+  function reveal(descnum) {
+
+    if (document.getElementById(descnum).style.display == 'none') {
+      document.getElementById(descnum).style.display = 'block';
+
+    }
+    else{
+      document.getElementById(descnum).style.display= 'none';
+    }
+  }
+  </script>
+
+  <meta name="Keywords" content="Open Source Software, Education, Courses, RCOS RPI" >
+</head>
+
+<body>
+  <div class='top'>
+    <table border=0 cellpadding=0 cellspacing=0>
+      <tr>
+        <td id='rpi'><img src="http://rcos.rpi.edu/rpi.jpg" alt="RPI logo"/></td>
+        <td id='title'><h1>Rensselaer Center for Open Source Software</h1></td>
+        <td><img src="http://rcos.rpi.edu/opensource.jpg" alt="Open Source Logo"/></td>
+      </tr>
+    </table>
+
+  </div>
+  <div class='content'>
+
+    <div class='mid'>
+      <div class='links'>
+        <a href="http://rcos.rpi.edu/morelinks.html"> Important Links </a>
+        <a href="http://rcos.rpi.edu/index.html">Projects</a>
+        <a href="http://rcos.rpi.edu/donor.html">Donor</a>
+        <a href="http://rcos.rpi.edu/students.html">Students</a>
+        <a href="http://public.kitware.com/OpenSourceSoftwarePractice/index.php/Fall2009/Main_Page"> Courses</a>
+        <a href="http://www.cs.rpi.edu/~moorthy/rcos/talksfall2009"> Talks  </a><br>
+        <a href="http://rcos.rpi.edu/competition.html"> Programming Competition</a>
+        <a href="http://rcos.rpi.edu/Achievements.html"> Achievements</a>
+        <a href="http://rcos.rpi.edu/URP_Application.pdf"> URP Application </a>
+        <a href="http://rcos.rpi.edu/contacts.html"> Contacts </a>
+      </div>
+    </div>
+    <div class='bot'>
+      <div class='stuff'>
+        <h3 onClick="reveal('Spring10')"><a href="#nogo">Spring '10</a></h3>
+        <div id="Spring10">
+          <% @group.projects.each do |project| %>
+          <div class="project">
+            <h4><span class="name"><%= link_to project.name, project.website || project.blog %></span>,
+              by <%= project.formatted_contributors %></h4>
+              <p><%= project.description %></p>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  new Rico.Effect.Round ('div','top',{blend:false,corners:"all"});
+  new Rico.Effect.Round ('div','mid',{blend:false});	
+  new Rico.Effect.Round ('div','bot',{blend:false});
+  new Rico.Effect.Round ('div','container',{blend:false});
+  </script>
+
+</body>
+</html>
+
+
+
+
