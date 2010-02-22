@@ -1,0 +1,20 @@
+<% @title = @group.name + " Laggards" %>
+<table>
+    <tr>
+        <% ["name", "contributors", "blog", "source_code"].map{|name| name.gsub('_', ' ').capitalize}.each do |col| %>
+            <th><%= col %></th>
+        <% end %>
+    </tr>
+
+    <% @projects.each do |project| %>
+        <tr>
+            <% ["name", "contributors", "blog", "source_code"].each do |col| %>
+              <td class="<%= value_class(col, project) %>"
+                style="<%= value_style(col, project)%>">
+                <%= column_contents(col, project) %>
+              </td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+

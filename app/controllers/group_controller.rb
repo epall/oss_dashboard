@@ -36,4 +36,11 @@ class GroupController < ApplicationController
     @group = Group.find(params[:id], :include => [:projects])
     render :layout => false
   end
+  
+  def laggards
+    @group = Group.find(params[:id], :include => [:projects])
+    @projects = @group.projects.find_all do |project|
+      project.blog_age > 14 || project.source_code_age > 14
+    end
+  end
 end
