@@ -33,7 +33,7 @@ class GroupController < ApplicationController
   end
   
   def listing
-    @group = Group.find(params[:id], :include => [:projects])
+    @group = Group.find(params[:id])
     render :layout => false
   end
   

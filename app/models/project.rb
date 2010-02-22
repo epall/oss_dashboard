@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   belongs_to :group
   
   named_scope :approved, :conditions => {:approved => true}
+  named_scope :alphabetical, :order => :name
 
   def self.display_columns
     ["name", "contributors", "blog", "source_code", "wiki"]
