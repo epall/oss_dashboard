@@ -21,14 +21,16 @@
 </div>
 <table>
     <tr>
-        <% Project.display_columns.map{|name| name.gsub('_', ' ').capitalize}.each do |col| %>
-            <th><%= col %></th>
-        <% end %>
+      <th>Name</th>
+      <th>Contributors</th>
+      <th>Blog</th>
+      <th>Source code</th>
+      <th>Wiki</th>
     </tr>
 
     <% @projects.each do |project| %>
         <tr>
-            <% Project.display_columns.each do |col| %>
+            <% ["name", "contributors", "blog", "source_code", "wiki"].each do |col| %>
               <td class="<%= value_class(col, project) %>"
                 style="<%= value_style(col, project)%>">
                 <%= column_contents(col, project) %>

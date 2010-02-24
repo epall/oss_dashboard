@@ -5,10 +5,6 @@ class Project < ActiveRecord::Base
   named_scope :approved, :conditions => {:approved => true}
   named_scope :alphabetical, :order => :name
 
-  def self.display_columns
-    ["name", "contributors", "blog", "source_code", "wiki"]
-  end
-  
   def fetch
     feed_objects = [self.blog_parser,self.source_code_parser].compact
     feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 45})
