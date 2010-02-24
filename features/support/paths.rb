@@ -11,6 +11,8 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
     
+    when /the group listing page for group (.+)/
+      '/group/listing/'+$1
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
