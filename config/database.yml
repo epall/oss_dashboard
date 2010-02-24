@@ -6,7 +6,7 @@ development:
   pool: 5
   timeout: 5000
 
-test:
+test: &TEST
   adapter: sqlite3
   database: db/test.sqlite3
 
@@ -16,3 +16,6 @@ production:
   username: rails
   password: <%= begin IO.read("/usr/local/www/rcos_dashboard/.db") rescue "" end %>
 
+
+cucumber:
+  <<: *TEST
