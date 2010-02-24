@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
     feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 45})
     feed_cache = [feed_cache] unless feed_cache.is_a? Array
     feed_cache.reject! {|e| e.is_a? Fixnum}
-    projects.each {|p| p.update_from_feed(feed_cache)}
-    personal_blogs.each {|b| b.update_from_feed(feed_cache)}
+    projects.each {|p| p.update_from_feed!(feed_cache)}
+    personal_blogs.each {|b| b.update_from_feed!(feed_cache)}
   end
 end

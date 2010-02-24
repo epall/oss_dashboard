@@ -5,42 +5,12 @@ class Project < ActiveRecord::Base
   named_scope :approved, :conditions => {:approved => true}
   named_scope :alphabetical, :order => :name
 
+  # Utility method for experimenting on the Rails console
   def fetch
     feed_objects = [self.blog_parser,self.source_code_parser].compact
     feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 45})
     feed_cache = [feed_cache] unless feed_cache.is_a? Array
-    self.update_from_feed(feed_cache)
-  end
-
-  def age
-    s = entry_age(last_source_code_entry)
-    b = entry_age(last_blog_entry)
-    score = s * s + s * b + b * b + s
-    return score
-  end
-  
-  def formatted_contributors
-    contributors.split(/, ?/).to_sentence
-  end
-  
-  def blogs_this_week
-    events.blog.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
-  end
-  
-  def commits_this_week
-    events.code.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
-  end
-  
-  def activity_this_week
-    events.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
-  end
-  
-  def total_activity
-    events.count
-  end
-  
-  def number_of_contributors
-    contributors.count(',')+1
+    self.update_from_feed!(feed_cache)
   end
 
   def blog_parser
@@ -73,7 +43,7 @@ class Project < ActiveRecord::Base
     return feed_to_update
   end
 
-  def update_from_feed(feed_cache)
+  def update_from_feed!(feed_cache)
     @blog_feed_data = feed_cache.find {|f| f.feed_url == blog_feed }
     @source_code_feed_data = feed_cache.find {|f| f.feed_url == source_code_feed }
     self.blog_last_modified = @blog_feed_data.last_modified rescue nil
@@ -81,23 +51,41 @@ class Project < ActiveRecord::Base
     self.code_last_modified = @source_code_feed_data.last_modified rescue nil
     self.code_etag = @source_code_feed_data.etag rescue nil
     self.save!
-    generate_events()
+    generate_events!
   end
   
-  def generate_events
-    if @blog_feed_data
-      @blog_feed_data.entries.each do |entry|
-        Event.create_if_new(self, entry, 'blog')
-      end
-    end
-
-    if @source_code_feed_data
-      @source_code_feed_data.entries.each do |entry|
-        Event.create_if_new(self, entry, 'code')
-      end
-    end
+  # BEGIN synthetic attributes
+  def age
+    s = entry_age(last_source_code_entry)
+    b = entry_age(last_blog_entry)
+    score = s * s + s * b + b * b + s
+    return score
   end
-
+  
+  def formatted_contributors
+    contributors.split(/, ?/).to_sentence
+  end
+  
+  def blogs_this_week
+    events.blog.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
+  end
+  
+  def commits_this_week
+    events.code.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
+  end
+  
+  def activity_this_week
+    events.count(:all, :conditions => ['updated_at > ?', Time.now-7.days])
+  end
+  
+  def total_activity
+    events.count
+  end
+  
+  def number_of_contributors
+    contributors.count(',')+1
+  end
+  
   def blog_age
     entry_age(last_blog_entry)
   end
@@ -122,6 +110,8 @@ class Project < ActiveRecord::Base
   def last_source_code_entry
     events.code.last
   end
+  
+  # END synthetic attributes
 
   # BEGIN attribute customizations
   
@@ -199,5 +189,19 @@ class Project < ActiveRecord::Base
     age = Time.now - published
     days_old = (age / (60 * 60 * 24))
     return days_old
+  end
+
+  def generate_events!
+    if @blog_feed_data
+      @blog_feed_data.entries.each do |entry|
+        Event.create_if_new(self, entry, 'blog')
+      end
+    end
+
+    if @source_code_feed_data
+      @source_code_feed_data.entries.each do |entry|
+        Event.create_if_new(self, entry, 'code')
+      end
+    end
   end
 end

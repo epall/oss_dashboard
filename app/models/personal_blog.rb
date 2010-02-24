@@ -9,7 +9,7 @@ class PersonalBlog < ActiveRecord::Base
     feed_objects = [self.feed_parser]
     feed_cache = Feedzirra::Feed.update(feed_objects, {:timeout => 45})
     feed_cache = [feed_cache] unless feed_cache.is_a? Array
-    self.update_from_feed(feed_cache)
+    self.update_from_feed!(feed_cache)
   end
 
   def feed_parser
@@ -25,7 +25,7 @@ class PersonalBlog < ActiveRecord::Base
     return feed_to_update
   end
   
-  def update_from_feed(feed_cache)
+  def update_from_feed!(feed_cache)
     @feed_data = feed_cache.find {|f| f.feed_url == feed }
     return if @feed_data.nil?
     # save modification data to avoid abusing servers
