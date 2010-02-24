@@ -127,10 +127,71 @@ class Project < ActiveRecord::Base
     events.code.last
   end
 
+  # BEGIN attribute customizations
+  
+  # Safari generates feed:// links, which sucks
+  def source_code_feed=(feed)
+    super(feed.gsub(/^feed:/, 'http:'))
+  end
+  
+  def blog_feed=(feed)
+    super(feed.gsub(/^feed:/, 'http:'))
+  end
+  
+  # don't allow nulling out of fields to prevent overwrite
+  # of hosting type-derrived fields during construction
+  def source_code=(val)
+    super(val) if source_code.nil? || source_code == ''
+  end
+  
+  def website=(val)
+    super(val) if website.nil? || website == ''
+  end
+  
+  def wiki=(val)
+    super(val) if wiki.nil? || wiki == ''
+  end
+  
+  # once set, you can't get back project hosting type
+  def github; ""; end
+  def googlecode; ""; end
+  def redmine; ""; end
+  
+  # Support for various hosting types
+  def github=(project_name)
+    return if project_name.nil?
+    components = project_name.split('/')
+    self.source_code = "http://github.com/#{project_name}/"
+    self.source_code_feed = "http://github.com/feeds/#{components[0]}/commits/#{components[1]}/master"
+    self.wiki = "http://wiki.github.com/#{project_name}/"
+  end
+  
+  def googlecode=(name)
+    return if name.nil?
+    self.website = "http://code.google.com/p/#{name}/"
+    self.source_code = "http://code.google.com/p/#{name}/source/browse/"
+    self.source_code_feed = "http://code.google.com/feeds/p/#{name}/svnchanges/basic"
+    self.wiki = "http://code.google.com/p/#{name}/w/list"
+  end
+  
+  def redmine=(home)
+    return if home.nil?
+    name = home.split('/').last
+    base = home.match("(https?://[^/]*)/.*")[1]
+    self.website = home
+    self.blog = "#{base}/projects/#{name}/news"
+    self.blog_feed = "#{base}/projects/#{name}/news?format=atom"
+    self.source_code = "#{base}/repositories/show/#{name}"
+    self.source_code_feed = "#{base}/repositories/revisions/#{name}?format=atom"
+    self.wiki = "#{base}/wiki/#{name}"
+  end
+  
+  # END attribute customizations
 
   def before_save
-    self.website = nil if self.website == ''
-    self.wiki = nil if self.wiki == ''
+    # go find feeds
+    self.source_code_feed ||= FeedDetector.fetch_feed_url(self.source_code) rescue nil
+    self.blog_feed ||= FeedDetector.fetch_feed_url(self.blog) rescue nil
   end
   
   private

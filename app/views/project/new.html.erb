@@ -1,91 +1,99 @@
 <% content_for :head do %>
-  <%= javascript_include_tag 'jquery' %>
-  <script type="text/javascript">
-    $(function(){
-        $('#hosting').change(function(){
-          $('.hosting').hide();
-          $(".hosting."+this.value.replace(" ", "_")).show();
-          
-          if(this.value == "Redmine"){
-            $('#blog_info').hide();
-          }
-          });
-        });
+<%= javascript_include_tag 'jquery' %>
+<script type="text/javascript">
+$(function(){
+  $('#hosting').change(function(){
+    $('.hosting').hide();
+    $(".hosting."+this.value.replace(" ", "_")).show();
+
+    if(this.value == "Redmine"){
+      $('#blog_info').hide();
+    } else {
+      $('#blog_info').show();
+    }
+  });
+});
 </script>
 
 <style type="text/css">
-  tr.hosting {
-    display: none;
-  }
+tr.hosting {
+  display: none;
+}
 
-  .hosting.custom {
-    display: table-row;
-  }
+.hosting.custom {
+  display: table-row;
+}
 
-  table#project_entry th {
-    width: 20em;
-    text-align: right;
-    padding-right: 1em;
-  }
+table#project_entry th {
+  width: 20em;
+  text-align: right;
+  padding-right: 1em;
+}
 
-  em {
-    font-size: 80%;
-    font-weight: normal;
-  }
+em {
+  font-size: 80%;
+  font-weight: normal;
+}
 
-  table {
-    margin: auto;
-    padding-right: 12em;
-  }
-  
+table {
+  margin: auto;
+  padding-right: 12em;
+}
+
 </style>
 <% end %>
 
 <h1>New Project</h1>
-<% form_tag :action => 'create' do %>
-  <table id="project_entry">
-    <tr>
-      <th><%= label_tag :name %></th>
-      <td><%= text_field_tag :name %></td>
-    </tr>
-    <tr>
-      <th><%= label_tag :contributors, "Contributors<br><em>(comma-separated)</em>" %></th>
-      <td><%= text_field_tag :contributors %></td>
+<% form_for :project, Project.new, :url => {:action => :create} do |f| %>
+<table id="project_entry">
+  <tr>
+    <th><%= f.label :name %></th>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :contributors, "Contributors<br><em>(comma-separated)</em>" %></th>
+    <td><%= f.text_field :contributors %></td>
 
     <tr>
       <th><%= label_tag :hosting %></th>
       <td><%= select_tag :hosting, options_for_select(HostingType.enumerate) %></td>
     </tr>
     <tr class="hosting GitHub">
-      <th><%= label_tag :github, "Project name<br><em>(e.g. epall/tracks)</em>" %> </th>
-      <td><%= text_field_tag :github %></td>
+      <th><%= f.label :github, "Project name<br><em>(e.g. epall/tracks)</em>" %> </th>
+      <td><%= f.text_field :github %></td>
     </tr>
     <tr class="hosting Redmine">
-      <th><label for="redmine_home">Redmine home<br>
-        <em>(e.g. http://rpinventory.com/projects/show/rpinventory)</label></th>
-      <td><%= text_field_tag :redmine_home %></td>
+      <th><%= f.label :redmine, "Redmine home" %><br>
+        <em>(e.g. http://rpinventory.com/projects/show/rpinventory)</em>
+      </th>
+      <td><%= f.text_field :redmine %></td>
     </tr>
     <tr class="hosting custom">
-      <th><%= label_tag :custom_url, "Source Code URL" %></th>
-      <td><%= text_field_tag :custom_url %></td>
+      <th><%= f.label :source_code, "Source Code URL" %></th>
+      <td><%= f.text_field :source_code %></td>
     </tr>
     <tr class="hosting custom">
-      <th><%= label_tag :custom_wiki, "Wiki URL" %></th>
-      <td><%= text_field_tag :custom_wiki %></td>
+      <th><%= f.label :wiki, "Wiki URL" %></th>
+      <td><%= f.text_field :wiki %></td>
     </tr>
     <tr class="hosting Google_Code">
-      <th><label for="googlecode">Project Name<br><em>(e.g. dplms)</em></br></label></th>
-      <td><%= text_field_tag :googlecode %></td>
+      <th><%= f.label :googlecode, "Project Name"%><br>
+        <em>(e.g. dplms)</em></label>
+      </th>
+      <td><%= f.text_field :googlecode %></td>
     </tr>
-    
+
     <tr class="blog" id="blog_info">
-      <th><%= label_tag :blog_url, "Blog URL<br><em>(e.g. http://ngodb.blogspot.com/)</em>" %></th>
-      <td><%= text_field_tag :blog_url %></td>
+      <th><%= f.label :blog, "Blog URL"%><br>
+        <em>(e.g. http://ngodb.blogspot.com/)</em>
+      </th>
+      <td><%= f.text_field :blog %></td>
     </tr>
-    
+
     <tr>
-      <th><%= label_tag :description %></th>
-      <td><%= text_area_tag :description, "", :rows => 10, :cols => 40 %></td>
+      <th><%= f.label :description %></th>
+      <td><%= f.text_area :description, :rows => 10, :cols => 40 %></td>
+    </tr>
 
     <tr>
       <td>&nbsp;</td>

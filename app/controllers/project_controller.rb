@@ -2,46 +2,7 @@ class ProjectController < ApplicationController
   layout 'application', :except => [:new, :create]
 
   def create
-    @project = Project.new
-    @project.name = params[:name]
-    @project.contributors = params[:contributors]
-    @project.group = Group.last # TODO generalize
-    @project.description = params[:description]
-    
-    if not params[:github].empty?
-      @project.blog = params[:blog_url]
-      @project.blog_feed = FeedDetector.fetch_feed_url(@project.blog) rescue ""
-      components = params[:github].split('/')
-      @project.source_code = "http://github.com/#{params[:github]}/"
-      @project.source_code_feed = "http://github.com/feeds/#{components[0]}/commits/#{components[1]}/master"
-      @project.wiki = "http://wiki.github.com/#{params[:github]}/"
-    elsif not params[:redmine_home].empty?
-      home = params[:redmine_home]
-      name = home.split('/').last
-      base = home.match("(https?://[^/]*)/.*")[1]
-      @project.website = home
-      @project.blog = "#{base}/projects/#{name}/news"
-      @project.blog_feed = "#{base}/projects/#{name}/news?format=atom"
-      @project.source_code = "#{base}/repositories/show/#{name}"
-      @project.source_code_feed = "#{base}/repositories/show/#{name}?format=atom"
-      @project.wiki = "#{base}/wiki/#{name}"
-    elsif not params[:googlecode].empty?
-      name = params[:googlecode]
-      @project.blog = params[:blog_url]
-      @project.blog_feed = FeedDetector.fetch_feed_url(@project.blog) rescue ""
-      @project.source_code = 
-      @project.website = "http://code.google.com/p/#{name}/"
-      @project.source_code = "http://code.google.com/p/#{name}/source/browse/"
-      @project.source_code_feed = "http://code.google.com/feeds/p/#{name}/svnchanges/basic"
-      @project.wiki = "http://code.google.com/p/#{name}/w/list"
-    else # custom
-      @project.blog = params[:blog_url]
-      @project.blog_feed = FeedDetector.fetch_feed_url(@project.blog) rescue ""
-      @project.source_code = params[:custom_url]
-      @project.source_code_feed = FeedDetector.fetch_feed_url(@project.source_code) rescue ""
-      @project.wiki = params[:custom_wiki]
-    end
-    
+    @project = Project.new(params[:project])
     @project.password = generate_password
     @project.approved = false
     @project.save!
