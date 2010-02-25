@@ -3,6 +3,7 @@ class ProjectController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
+    @project.group = Group.last
     @project.password = generate_password
     @project.approved = false
     @project.save!
