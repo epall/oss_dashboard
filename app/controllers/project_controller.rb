@@ -24,7 +24,7 @@ class ProjectController < ApplicationController
     @project.update_attributes!(params[:project])
     # @project.save!
 
-    redirect_to :controller => 'group', :action => 'show', :id => @project.group
+    redirect_to :controller => 'groups', :action => 'show', :id => @project.group
   end
 
   def approve

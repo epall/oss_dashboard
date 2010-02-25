@@ -89,7 +89,7 @@ class PersonalBlogsController < ApplicationController
     if request.method == :post
       if params[:admin_password] == @blog.group.admin_password
         @blog.update_attribute('approved', true)
-        redirect_to :controller => :group, :action => :fetch, :id => @blog.group.id
+        redirect_to :controller => :groups, :action => :fetch, :id => @blog.group.id
       else
       flash[:notice] = "Access denied"
       redirect_to :back

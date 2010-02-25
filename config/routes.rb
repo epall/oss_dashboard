@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :personal_blogs
+  map.resources :groups
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -42,14 +43,12 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
   #
   map.approve 'project/approve/:id', :controller => 'project', :action => 'approve'
-  map.showgroup 'g/:id', :controller => 'group', :action => 'show'
+  map.showgroup 'g/:id', :controller => 'groups', :action => 'show'
   
-  map.authenticate '/authenticate/:id', :controller => 'group', :action => 'authenticate'
-  map.admin '/admin/:id', :controller => 'group', :action => 'admin'
+  map.authenticate '/authenticate/:id', :controller => 'groups', :action => 'authenticate'
+  map.admin '/admin/:id', :controller => 'groups', :action => 'admin'
 
-  map.root :controller => 'group'
-  #map.resource :project
-
+  map.root :controller => 'groups', :action => 'index'
 
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action.:format'

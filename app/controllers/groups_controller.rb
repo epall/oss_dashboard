@@ -1,12 +1,16 @@
-class GroupController < ApplicationController
+class GroupsController < ApplicationController
   caches_page :show
   
   def index
     # TODO actually support listing of groups
-    redirect_to :action => 'show', :id => Group.first.id
+    redirect_to :action => 'dashboard', :id => Group.last.id
   end
 
   def show
+    @group = Group.find(params[:id])
+  end
+  
+  def dashboard
     @group = Group.find(params[:id])
 
     @projects = @group.projects.approved.sort_by(&:age)
@@ -29,12 +33,7 @@ class GroupController < ApplicationController
     @group.fetch
     expire_page :action => 'show', :id => @group.id
     expire_page :controller => 'events', :action => 'index'
-    redirect_to :action => 'show', :id => params[:id]
-  end
-  
-  def listing
-    @group = Group.find(params[:id])
-    render :layout => false
+    redirect_to :action => 'dashboard', :id => params[:id]
   end
   
   def laggards

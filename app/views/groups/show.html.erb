@@ -1,0 +1,33 @@
+<% @title = @group.name %>
+<% content_for :head do %>
+<style type="text/css" media="screen">
+  div.project {
+    margin-bottom:1em;
+    max-width:40em;
+    margin: auto;
+  }
+
+  p.description {
+    margin-top: 0.3em;
+  }
+  
+  h4 {
+    font-size: inherit;
+    margin: 0px;
+    margin-bottom: 0.3em;
+    font-weight: normal;
+  }
+  
+  h4 span.name {
+    font-weight: bold;
+  }
+</style>
+<% end %>
+<% @group.projects.alphabetical.each do |project| %>
+<div class="project">
+  <h4><span class="name"><%= link_to project.name, project.website || project.blog %></span>,
+    by <%= project.formatted_contributors %></h4>
+    <p class="description"><%= project.description %></p>
+  </div>
+  <% end %>
+</div>
