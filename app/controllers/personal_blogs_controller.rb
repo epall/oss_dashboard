@@ -25,6 +25,7 @@ class PersonalBlogsController < ApplicationController
   # GET /personal_blogs/new.xml
   def new
     @personal_blog = PersonalBlog.new
+    @personal_blog.group_id = params[:group_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +43,6 @@ class PersonalBlogsController < ApplicationController
   def create
     @personal_blog = PersonalBlog.new(params[:personal_blog])
     @personal_blog.feed = @personal_blog.feed.gsub(/^feed/, 'http')
-    @personal_blog.group = Group.first
 
     respond_to do |format|
       if @personal_blog.save

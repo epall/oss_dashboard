@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :personal_blogs
-  map.resources :groups
+  map.resources :projects
+  map.resources :groups, :has_many => [:personal_blogs, :projects]
 
   # The priority is based upon order of creation: first created -> highest priority.
 

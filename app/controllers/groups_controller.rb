@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  caches_page :show
+  caches_page :show, :dashboard, :feed
   
   def index
     # TODO actually support listing of groups
@@ -31,9 +31,9 @@ class GroupsController < ApplicationController
   def fetch
     @group = Group.find(params[:id])
     @group.fetch
-    expire_page :action => 'show', :id => @group.id
-    expire_page :controller => 'events', :action => 'index'
-    redirect_to :action => 'dashboard', :id => params[:id]
+    expire_page :action => :show, :id => @group.id
+    expire_page :action => :feed, :id => @group.id
+    redirect_to :action => :dashboard, :id => @group.id
   end
   
   def laggards
@@ -54,6 +54,18 @@ class GroupsController < ApplicationController
         flash[:notice] = "Access denied"
         redirect_to :back
       end
+    end
+  end
+  
+  def feed
+    @group = Group.find(params[:id])
+    # TODO this is going to be horribly slow...
+    events = (@group.project_events.blog + @group.blog_events).sort_by(&:created_at).reverse
+    
+    @events = events.paginate :page => params[:page], :per_page => 10
+    respond_to do |format|
+      format.html
+      format.atom
     end
   end
 end

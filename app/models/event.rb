@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   belongs_to :personal_blog
   
   validates_uniqueness_of :identifier
-  default_scope :order => 'created_at ASC'
+  # default_scope :order => 'created_at ASC'
   named_scope :blog, :conditions => {:entry_type => 'blog'}
   named_scope :code, :conditions => {:entry_type => 'code'}
   

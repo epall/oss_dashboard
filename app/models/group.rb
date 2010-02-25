@@ -1,6 +1,8 @@
 class Group < ActiveRecord::Base
   has_many :projects
   has_many :personal_blogs
+  has_many :project_events, :through => :projects, :source => :events
+  has_many :blog_events, :through => :personal_blogs, :source => :events
   
   def fetch
     projects = self.projects.approved

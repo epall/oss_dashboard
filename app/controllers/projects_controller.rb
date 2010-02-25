@@ -1,4 +1,4 @@
-class ProjectController < ApplicationController
+class ProjectsController < ApplicationController
   layout 'application', :except => [:new, :create]
 
   def create
@@ -58,10 +58,17 @@ class ProjectController < ApplicationController
   end
 
   def new
+    @project = Project.new
+    @project.group_id = params[:group_id]
+    @groups = Group.all
     render :layout => 'simple'
   end
   
   def edit
+    @project = Project.find(params[:id])
+  end
+  
+  def show
     @project = Project.find(params[:id])
   end
   

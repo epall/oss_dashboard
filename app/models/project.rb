@@ -145,7 +145,7 @@ class Project < ActiveRecord::Base
   
   # Support for various hosting types
   def github=(project_name)
-    return if project_name.nil?
+    return if project_name.nil? or project_name.empty?
     components = project_name.split('/')
     self.source_code = "http://github.com/#{project_name}/"
     self.source_code_feed = "http://github.com/feeds/#{components[0]}/commits/#{components[1]}/master"
@@ -153,7 +153,7 @@ class Project < ActiveRecord::Base
   end
   
   def googlecode=(name)
-    return if name.nil?
+    return if name.nil? or name.empty?
     self.website = "http://code.google.com/p/#{name}/"
     self.source_code = "http://code.google.com/p/#{name}/source/browse/"
     self.source_code_feed = "http://code.google.com/feeds/p/#{name}/svnchanges/basic"
@@ -161,7 +161,7 @@ class Project < ActiveRecord::Base
   end
   
   def redmine=(home)
-    return if home.nil?
+    return if home.nil? or home.empty?
     name = home.split('/').last
     base = home.match("(https?://[^/]*)/.*")[1]
     self.website = home
