@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  has_many :events
+  has_many :events, :as => :event_producer
   belongs_to :group
   
   named_scope :approved, :conditions => {:approved => true}

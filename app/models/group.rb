@@ -1,8 +1,9 @@
 class Group < ActiveRecord::Base
   has_many :projects
   has_many :personal_blogs
+  
+  has_many :personal_blog_events, :through => :personal_blogs, :source => :events
   has_many :project_events, :through => :projects, :source => :events
-  has_many :blog_events, :through => :personal_blogs, :source => :events
   
   def fetch
     projects = self.projects.approved
@@ -14,5 +15,11 @@ class Group < ActiveRecord::Base
     feed_cache.reject! {|e| e.is_a? Fixnum}
     projects.each {|p| p.update_from_feed!(feed_cache)}
     personal_blogs.each {|b| b.update_from_feed!(feed_cache)}
+  end
+  
+  def events
+    # TODO this is really slow
+    entries = personal_blog_events + project_events.blog
+    return entries.sort_by(&:created_at).reverse
   end
 end

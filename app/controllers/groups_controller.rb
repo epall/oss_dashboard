@@ -59,10 +59,8 @@ class GroupsController < ApplicationController
   
   def feed
     @group = Group.find(params[:id])
-    # TODO this is going to be horribly slow...
-    events = (@group.project_events.blog + @group.blog_events).sort_by(&:created_at).reverse
+    @events = @group.events.paginate :page => params[:page], :per_page => 10
     
-    @events = events.paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html
       format.atom

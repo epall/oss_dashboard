@@ -1,6 +1,5 @@
 class Event < ActiveRecord::Base
-  belongs_to :project
-  belongs_to :personal_blog
+  belongs_to :event_producer, :polymorphic => true
   
   validates_uniqueness_of :identifier
   # default_scope :order => 'created_at ASC'
@@ -10,9 +9,7 @@ class Event < ActiveRecord::Base
   def self.create_if_new(parent, raw_article, type)
     return if raw_article.title.nil?
     event = Event.new do |e|
-      e.project = parent if parent.is_a? Project
-      e.personal_blog = parent if parent.is_a?(PersonalBlog)
-      
+      e.event_producer = parent
       e.entry_type = type
       e.title = raw_article.title
       e.summary = raw_article.summary
@@ -23,9 +20,5 @@ class Event < ActiveRecord::Base
       e.identifier = raw_article.id
     end
     return event.save
-  end
-  
-  def parent
-    self.project || self.personal_blog
   end
 end

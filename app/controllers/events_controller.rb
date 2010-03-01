@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   caches_page :index, :full
   
   def index
-    @events = Event.blog.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10, :include => [:project]
+    @events = Event.blog.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10, :include => [:event_producer]
     respond_to do |format|
       format.html
       format.atom

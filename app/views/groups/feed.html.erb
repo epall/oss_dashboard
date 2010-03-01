@@ -9,7 +9,7 @@
       <%= event.summary || event.content %>
 	  <div class="post_readmore">
 		Read more at
-		<%= link_to event.parent.name, event.permalink %> •
+		<%= link_to event.event_producer.name, event.permalink %> •
 		<%= link_to "RCOS Dashboard", :action => 'full', :id => event.id %>
 	  </div>
     </div>
@@ -18,7 +18,7 @@
         <div class="post_date"><%= day(event.created_at) %></div>
         <div class="post_month"><%= event.created_at.strftime('%B') %></div>
       </div>
-      <div class="post_project"><%= event.parent.name %></div>
+      <div class="post_project"><%= event.event_producer.name %></div>
     </div>
     <hr />
   </div>

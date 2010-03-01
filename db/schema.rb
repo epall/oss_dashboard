@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100222002236) do
+ActiveRecord::Schema.define(:version => 20100226185353) do
 
   create_table "events", :force => true do |t|
     t.integer  "project_id"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20100222002236) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "personal_blog_id"
+    t.integer  "event_producer_id"
+    t.string   "event_producer_type"
   end
 
   create_table "groups", :force => true do |t|

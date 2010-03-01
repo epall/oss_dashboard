@@ -1,6 +1,6 @@
 class PersonalBlog < ActiveRecord::Base
   belongs_to :group
-  has_many :events
+  has_many :events, :as => :event_producer
   named_scope :approved, :conditions => {:approved => true}
   
   validates_presence_of :name, :weblink, :feed
