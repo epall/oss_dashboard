@@ -43,11 +43,10 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
   #
-  map.approve 'project/approve/:id', :controller => 'project', :action => 'approve'
   map.showgroup 'g/:id', :controller => 'groups', :action => 'show'
   
   map.authenticate '/authenticate/:id', :controller => 'groups', :action => 'authenticate'
-  map.admin '/admin/:id', :controller => 'groups', :action => 'admin'
+  map.admin '/groups/admin/:id', :controller => 'groups', :action => 'admin'
 
   map.root :controller => 'groups', :action => 'index'
 

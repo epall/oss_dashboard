@@ -1,4 +1,4 @@
-<h1>Approve <%= @project.name %></h1>
+<% @title = "Approve #{@project.name}" %>
 <% if flash[:notice] %>
   <div class="notice" style="padding:5px; background-color:#FFAAAA; border: 2px solid red"><%= flash[:notice] %></div>
 <% end %>

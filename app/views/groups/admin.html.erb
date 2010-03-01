@@ -11,10 +11,10 @@
       <td><%= project.name %></td>
       <td width="50%"><%= project.contributors %></td>
       <td style="text-align:center"><%= project.presentation_count %>
-      <%= button_to("+", :controller => :project, :action => :add_presentation, :id => project.id) %></td>
+      <%= button_to("+", :controller => :projects, :action => :add_presentation, :id => project.id) %></td>
       <td>
-        <%= link_to 'Edit', :controller => :project, :action => :edit, :id => project.id %>
-        <%= link_to("Approve", approve_url(project)) unless project.approved? %>
+        <%= link_to 'Edit', :controller => :projects, :action => :edit, :id => project.id %>
+        <%= link_to("Approve", :controller => :projects, :action => :approve, :id => project.id) unless project.approved? %>
       </td>
     </tr>
   <% end -%>

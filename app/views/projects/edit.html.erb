@@ -4,7 +4,7 @@
   <div class="notice" style="padding:5px; background-color:#FFAAAA; border: 2px solid red"><%= flash[:notice] %></div>
 <% end %>
 
-<% form_for :project, @project, :url => {:action => 'update', :id => @project} do |f| %>
+<% form_for @project do |f| %>
   <p>
   <%= f.label :name %>:
   <%= f.text_field :name %>
