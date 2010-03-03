@@ -10,7 +10,7 @@
 	  <div class="post_readmore">
 		Read more at
 		<%= link_to event.event_producer.name, event.permalink %> •
-		<%= link_to "RCOS Dashboard", :action => 'full', :id => event.id %>
+		<%= link_to "RCOS Dashboard", :controller => :events, :action => :full, :id => event %>
 	  </div>
     </div>
     <div class="post_details">
