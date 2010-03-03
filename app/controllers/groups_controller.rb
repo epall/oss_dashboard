@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   caches_page :show, :dashboard, :feed
+  layout 'application', :except => [:show]
   
   def index
     # TODO actually support listing of groups

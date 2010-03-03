@@ -48,7 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.authenticate '/authenticate/:id', :controller => 'groups', :action => 'authenticate'
   map.admin '/groups/admin/:id', :controller => 'groups', :action => 'admin'
 
-  map.root :controller => 'groups', :action => 'index'
+  map.root :controller => 'groups', :action => 'show', :id => 1
 
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action.:format'
