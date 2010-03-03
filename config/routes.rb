@@ -47,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.authenticate '/authenticate/:id', :controller => 'groups', :action => 'authenticate'
   map.admin '/groups/admin/:id', :controller => 'groups', :action => 'admin'
+  map.feed '/groups/feed/:id/page/:page', :controller => 'groups', :action => 'feed'
 
   map.root :controller => 'groups', :action => 'index'
 
