@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>RCOS Dashboard : <%= params[:action].capitalize %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <script src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -28,8 +29,8 @@
       <div id="header">
         <h1><%= @title %></h1>
         <ul>
-          <li><%= link_to("Blogs", :controller => 'events')%></li>
-          <li><%= link_to("Projects", :controller => 'groups')%></li>
+          <li><%= link_to("Blogs", :controller => :groups, :action => :feed, :id => Group.last.id)%></li>
+          <li><%= link_to("Projects", :controller => :groups, :action => :dashboard, :id => Group.last.id)%></li>
         </ul>
       </div>
       <div id="content">
