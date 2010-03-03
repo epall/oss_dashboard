@@ -35,6 +35,11 @@
       <div id="content">
         <%= yield %>
       </div>
+      <% unless params[:action] == 'new' %>
+      <div id="footer">
+        OSS Dashboard is written by <a href="http://hackerengineer.net/">Eric Allen</a> and sponsored by the <a href="http://rcos.rpi.edu/">Rensselaer Center for Open Source</a>
+      </div>
+      <% end %>
     </div>
   </body>
 </html>

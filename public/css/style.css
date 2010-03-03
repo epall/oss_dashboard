@@ -63,6 +63,27 @@ h1 {
 	background-image:url("/pixels/header.png");
 }
 
+#footer {
+  padding:3px;
+  background-color:#222;
+  color:#FFF;
+  text-align: center;
+	margin: 0px -75px 0px -75px;
+	font-size: 75%;
+}
+
+#footer a {
+  color:#FFF;
+}
+
+#footer a:visited {
+  color:#FFF;
+}
+
+#footer a:hover {
+  color:#666;
+}
+
 #header ul
 {
 	float: right;
