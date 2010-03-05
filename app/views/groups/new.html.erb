@@ -1,0 +1,16 @@
+<% @title = "No groups" %>
+
+<p>
+You haven't created any groups to contain projects yet! Since OSS Dashboard's
+authentication model is per-group, you'll need to create the group manually
+using script/console, with something like
+</p>
+<p class="code">Group.create(:name => "awesome stuff", :admin_password => "this should be a secret",
+  :description => "A bunch of happy people working on amazing things at the speed of OPEN SOURCE!!")</span>
+</p>
+
+<p>
+If you want to be awesome, you could fix the authentication model of OSS Dashboard 
+to make things secure enough to support group creation. Until then, we're kind of 
+stuck with this manual process.
+</p>

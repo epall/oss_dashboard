@@ -261,3 +261,8 @@ hr {
 	border-bottom: 1px dashed rgb(200, 200, 210);
 	margin-bottom: 25px;
 }
+
+.code {
+  font-family: monospace;
+	text-align: left;
+}

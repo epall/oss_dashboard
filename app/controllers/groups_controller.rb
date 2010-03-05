@@ -3,7 +3,15 @@ class GroupsController < ApplicationController
   
   def index
     # TODO actually support listing of groups
-    redirect_to :action => 'dashboard', :id => Group.last.id
+    if Group.count.zero?
+      redirect_to :action => :new
+    else
+      redirect_to :action => 'dashboard', :id => Group.last.id
+    end
+  end
+  
+  def new
+    @group = Group.new
   end
 
   def show
