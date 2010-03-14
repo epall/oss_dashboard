@@ -11,11 +11,11 @@ test: &TEST
   database: db/test.sqlite3
 
 production:
-  adapter: mysql
-  database: oss_dashboard
-  username: rails
+  adapter: postgresql
+  host: postgres.rcos.cs.rpi.edu
+  username: dashboard
+  database: dashboard
   password: <%= begin IO.read("/usr/local/www/rcos_dashboard/.db") rescue "" end %>
-
 
 cucumber:
   <<: *TEST
