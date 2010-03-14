@@ -162,8 +162,9 @@ td.red {
 	background-color: #db8a8a;
 }
 
-#description p {
+#description > p {
 	margin-right: 340px;
+	min-height: 4em;
 }
 
 #stats {
