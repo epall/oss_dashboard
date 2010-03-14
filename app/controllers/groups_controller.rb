@@ -41,6 +41,7 @@ class GroupsController < ApplicationController
     @group.fetch
     expire_page :action => :show, :id => @group.id
     expire_page :action => :feed, :id => @group.id
+    expire_page :action => :dashboard, :id => @group.id
     redirect_to :action => :dashboard, :id => @group.id
   end
   
