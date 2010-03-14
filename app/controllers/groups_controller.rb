@@ -4,9 +4,13 @@ class GroupsController < ApplicationController
   
   def index
     # TODO actually support listing of groups
-    redirect_to :action => :show, :id => Group.last.id
+    if Group.count.zero?
+      redirect_to :action => :new
+    else
+      redirect_to :action => :dashboard, :id => Group.last.id
+    end
   end
-
+  
   def show
     @group = Group.find(params[:id])
   end
@@ -22,7 +26,7 @@ class GroupsController < ApplicationController
     @stats['none'] = @projects.reject{|p| p.blog || p.wiki || p.source_code}.size
     @stats['all_three'] = @projects.select{|p| p.blog && p.wiki && p.source_code}.size
     @stats['last_week'] = @projects.select{|p| [p.blog_age, p.source_code_age].min < 7}.size
-    @stats['members'] =  @projects.map(&:contributors).map{|c| c.split(/, ?/)}.flatten.uniq.count
+    @stats['members'] =  @projects.map(&:contributors).map{|c| c.split(/, ?/)}.flatten.uniq.size
   end
 
   def admin
@@ -34,6 +38,7 @@ class GroupsController < ApplicationController
     @group.fetch
     expire_page :action => :show, :id => @group.id
     expire_page :action => :feed, :id => @group.id
+    expire_page :action => :dashboard, :id => @group.id
     redirect_to :action => :dashboard, :id => @group.id
   end
   

@@ -101,7 +101,7 @@
       <div class='stuff'>
         <h3>Spring '10 Projects</h3>
         <div id="Spring10">
-          <% @group.projects.alphabetical.each do |project| %>
+          <% @group.projects.approved.alphabetical.each do |project| %>
           <div class="project">
             <h4><span class="name"><%= link_to project.name, project.website || project.blog %></span>,
               by <%= project.formatted_contributors %></h4>
