@@ -63,7 +63,7 @@ class Project < ActiveRecord::Base
   end
   
   def formatted_contributors
-    contributors.split(/, ?/).to_sentence
+    contributors.nil? ? "nobody" : contributors.split(/, ?/).to_sentence
   end
   
   def blogs_this_week
