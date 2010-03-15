@@ -7,4 +7,15 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  private
+  
+  def expire_dynamic_pages(group)
+    expire_page :controller => :groups, :action => :show, :id => group.id
+    expire_page :controller => :groups, :action => :feed, :id => group.id
+    1.upto(10) do |n|
+      expire_page :controller => :groups, :action => :feed, :id => group.id, :page => n
+    end
+    expire_page :controller => :groups, :action => :dashboard, :id => group.id
+  end
 end

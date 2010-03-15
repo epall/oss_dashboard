@@ -23,7 +23,8 @@ class ProjectsController < ApplicationController
     end
 
     @project.update_attributes!(params[:project])
-    # @project.save!
+    
+    expire_dynamic_pages(@project.group)
 
     redirect_to :controller => 'groups', :action => 'show', :id => @project.group
   end

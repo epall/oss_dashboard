@@ -36,9 +36,7 @@ class GroupsController < ApplicationController
   def fetch
     @group = Group.find(params[:id])
     @group.fetch
-    expire_page :action => :show, :id => @group.id
-    expire_page :action => :feed, :id => @group.id
-    expire_page :action => :dashboard, :id => @group.id
+    expire_dynamic_pages(@group)
     redirect_to :action => :dashboard, :id => @group.id
   end
   
