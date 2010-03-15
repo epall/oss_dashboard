@@ -127,15 +127,15 @@ class Project < ActiveRecord::Base
   # don't allow nulling out of fields to prevent overwrite
   # of hosting type-derrived fields during construction
   def source_code=(val)
-    super(val) if source_code.nil? || source_code == ''
+    super(val) unless val.nil? || val == ''
   end
   
   def website=(val)
-    super(val) if website.nil? || website == ''
+    super(val) unless val.nil? || val == ''
   end
   
   def wiki=(val)
-    super(val) if wiki.nil? || wiki == ''
+    super(val) unless val.nil? || val == ''
   end
   
   # once set, you can't get back project hosting type
