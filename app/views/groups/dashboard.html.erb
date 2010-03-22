@@ -19,7 +19,7 @@
   </div>
   <p><%= @group.description %></p>
 </div>
-<table>
+<table class="dashboard">
     <tr>
       <th>Name</th>
       <th>Contributors</th>
@@ -30,12 +30,21 @@
 
     <% @projects.each do |project| %>
         <tr>
-            <% ["name", "contributors", "blog", "source_code", "wiki"].each do |col| %>
-              <td class="<%= value_class(col, project) %>"
-                style="<%= value_style(col, project)%>">
-                <%= column_contents(col, project) %>
-              </td>
+          <td><%= linked_name(project) %></td>
+          <td><%= h(project.contributors).gsub(',', "<br>") %></td>
+          <td style="background-color: <%= color_from_age(project.blog_age) %>">
+            <%= linked_blog(project) %>
+          </td>
+          <td style="background-color: <%= color_from_age(project.source_code_age) %>">
+            <%= linked_source_code(project) %>
+          </td>
+          <td class="green">
+            <% if project.wiki and not project.wiki.empty? -%>
+              <a href="<%= h project.wiki %>">Go to wiki</a>
+            <% else -%>
+              None
             <% end %>
+          </td>
         </tr>
     <% end %>
 </table>

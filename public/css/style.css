@@ -143,7 +143,7 @@ th {
 	border: 0px;
 }
 
-td {
+table.dashboard td {
 	text-align: left;
 	border: none;
 	border-bottom: 1px solid black;
@@ -153,8 +153,13 @@ td {
 	min-width: 30px;
 }
 
-td.wiki {
+table.dashboard td.wiki {
 	text-align: center;
+}
+
+table.dashboard th {
+  padding-left:6px;
+  padding-right:6px;
 }
 
 tr {
