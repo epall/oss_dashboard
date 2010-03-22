@@ -33,6 +33,7 @@
           <li><%= link_to("Projects", :controller => :groups, :action => :dashboard, :id => Group.last.id)%></li>
         </ul>
       </div>
+      <% if flash[:notice] %><div id="notice"><%= flash[:notice] %></div><% end %>
       <div id="content">
         <%= yield %>
       </div>

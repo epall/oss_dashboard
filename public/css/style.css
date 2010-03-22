@@ -55,6 +55,15 @@ h1 {
 	padding: 15px 0px 15px 115px;
 }
 
+#notice {
+  text-align:center;
+  background-color: #FFC;
+  border: 2px solid #FF0;
+  height:1.7em;
+  padding-top:0.35em;
+  margin-top:6px;
+}
+
 #header {
 	margin: 0px -75px 0px -75px;
 	padding: 0px;
