@@ -9,13 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100226185353) do
+ActiveRecord::Schema.define(:version => 20100322181548) do
 
   create_table "events", :force => true do |t|
     t.integer  "project_id"
     t.string   "entry_type"
     t.string   "identifier"
-    t.string   "title"
+    t.text     "title",               :limit => 255
     t.string   "permalink"
     t.text     "content"
     t.text     "summary"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20100226185353) do
     t.integer  "group_id"
     t.text     "description"
     t.integer  "presentation_count", :default => 0
+    t.boolean  "sponsored"
   end
 
 end
