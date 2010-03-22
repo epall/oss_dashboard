@@ -12,7 +12,11 @@ class GroupsController < ApplicationController
   end
   
   def show
-    @group = Group.find(params[:id])
+    if request.request_uri =~ /dashboard.rcos.cs.rpi.edu\/?$/
+      redirect_to :action => :dashboard, :id => params[:id]
+    else
+      @group = Group.find(params[:id])
+    end
   end
   
   def dashboard
