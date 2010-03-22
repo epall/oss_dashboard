@@ -34,7 +34,13 @@ class GroupsController < ApplicationController
   end
 
   def admin
-    @group = Group.find(params[:id], :include => [:projects])
+    classB = request.remote_ip.split('.')[0..1].join('.')
+    if classB == '128.113' or classB == '128.213' or classB == '129.161' or classB == '127.0'
+      @group = Group.find(params[:id], :include => [:projects])
+    else
+      flash[:notice] = "Access restricted to RPI IP addresses"
+      redirect_to :action => :dashboard, :id => params[:id]
+    end
   end
   
   def fetch
