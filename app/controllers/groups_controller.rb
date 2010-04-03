@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
-  caches_page :show, :dashboard, :feed
+  caches_page :dashboard, :feed
+  caches_action :show # action caching to separate by subdomain
   layout 'application', :except => [:show]
   
   def index
@@ -13,7 +14,8 @@ class GroupsController < ApplicationController
   
   def show
     if request.request_uri =~ /dashboard.rcos.cs.rpi.edu\/?$/
-      redirect_to :action => :dashboard, :id => params[:id]
+      dashboard # setup template parameters
+      render :action => :dashboard, :layout => 'application'
     else
       @group = Group.find(params[:id])
     end
