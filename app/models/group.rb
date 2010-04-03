@@ -22,4 +22,11 @@ class Group < ActiveRecord::Base
     entries = personal_blog_events + project_events.blog
     return entries.sort_by(&:created_at).reverse
   end
+  
+  def as_json(options = {})
+    {:name => name, :description => description, :projects =>
+      projects.approved.map {|p| {:name => p.name,
+                                  :description => p.description,
+                                  :contributors => p.contributors_list}}}
+  end
 end

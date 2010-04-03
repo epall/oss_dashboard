@@ -17,7 +17,13 @@ class GroupsController < ApplicationController
       dashboard # setup template parameters
       render :action => :dashboard, :layout => 'application'
     else
-      @group = Group.find(params[:id])
+      @group = Group.find(params[:id], :include => [:projects])
+    end
+    
+    respond_to do |format|
+      format.html
+      # format.json { render :json => {:name => @group.name, :description => @group.description}}
+      format.json { render :json => @group }
     end
   end
   

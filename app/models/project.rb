@@ -63,7 +63,15 @@ class Project < ActiveRecord::Base
   end
   
   def formatted_contributors
-    contributors.nil? ? "nobody" : contributors.split(/, ?/).to_sentence
+    contributors.nil? ? "nobody" : contributors_list.to_sentence
+  end
+
+  def number_of_contributors
+    contributors.count(',')+1
+  end
+    
+  def contributors_list
+    contributors.split(/, ?/)
   end
   
   def blogs_this_week
@@ -80,10 +88,6 @@ class Project < ActiveRecord::Base
   
   def total_activity
     events.count
-  end
-  
-  def number_of_contributors
-    contributors.count(',')+1
   end
   
   def blog_age
