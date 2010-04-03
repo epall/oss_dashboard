@@ -27,6 +27,8 @@ class Group < ActiveRecord::Base
     {:name => name, :description => description, :projects =>
       projects.approved.map {|p| {:name => p.name,
                                   :description => p.description,
-                                  :contributors => p.contributors_list}}}
+                                  :contributors => p.contributors_list,
+                                  :blog_url => p.blog,
+                                  :source_code_url => p.source_code}}}
   end
 end
