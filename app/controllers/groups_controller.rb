@@ -18,11 +18,10 @@ class GroupsController < ApplicationController
       render :action => :dashboard, :layout => 'application'
     else
       @group = Group.find(params[:id], :include => [:projects])
-    end
-    
-    respond_to do |format|
-      format.html
-      format.json { render :json => @group }
+      respond_to do |format|
+        format.html
+        format.json { render :json => @group }
+      end
     end
   end
   
