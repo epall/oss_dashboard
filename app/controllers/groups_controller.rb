@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
   end
   
   def show
-    if request.request_uri =~ /dashboard.rcos.cs.rpi.edu\/?$/
+    if request.host == 'dashboard.rcos.cs.rpi.edu'
       dashboard # setup template parameters
       render :action => :dashboard, :layout => 'application'
     else
