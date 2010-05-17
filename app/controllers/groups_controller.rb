@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
     @groups = Group.all(:order => "created_at DESC")
 
     if request.host == 'dashboard.rcos.cs.rpi.edu'
+      @group = @groups.first
       dashboard # setup template parameters
       render :action => :dashboard, :id => @groups.first, :layout => 'application'
     else
@@ -23,7 +24,7 @@ class GroupsController < ApplicationController
   end
   
   def dashboard
-    @group = Group.find(params[:id])
+    @group ||= Group.find(params[:id])
 
     @projects = @group.projects.approved.sort_by(&:age)
     
