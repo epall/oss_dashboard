@@ -1,0 +1,109 @@
+	/*Clears browsers automatic settings*/
+
+	html,body,p,div,img,h1,h2,h3,h4,li,ul,ol,dl,dd,dt,form,table,td,tr{
+  	margin:0px;
+  	padding:0px;
+  	border:0px;
+  	border-collapse:separate;
+  	border-spacing:0px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	input,select{
+	  margin:0;
+	  padding:0;
+	}
+
+
+
+	body{background: black; font-size:14px;}
+	
+	/*Makes title and logos look centered*/
+
+	#title {width:100%;}
+	#rpi {padding:0 0 0 5px;}
+	
+	div#header {
+	  margin:10px auto 15px auto;
+	  width: 768px;
+	  height:120px;
+	  background-color: white;
+	  -webkit-border-radius: 8px;
+	  -moz-border-radius: 8px;
+	  border-radius: 8px;
+	  padding: 6px;
+	  text-align:center;
+	}
+	
+	div#header h1 {
+	  margin-top:30px;
+	}
+	
+	div.menu{margin:0 auto 0 auto; width:135px;  background-color: #cd3738; float:right;}
+	
+	div.menu {
+  	  -webkit-border-radius: 8px;
+  	  -moz-border-radius: 8px;
+  	  border-radius: 8px;
+	}
+	div#main{margin:0 15px 0 auto;  width:630px;  float:left; background: #40a850}
+	
+	div#main {
+  	  -webkit-border-radius: 8px;
+  	  -moz-border-radius: 8px;
+  	  border-radius: 8px;
+	}
+	
+	div.content{margin:0 auto 0 auto; width:780px;}
+	div.stuff{margin: 7px 7px 7px 15px;}
+	div.links{margin: 7px 7px 7px 10px;}
+		
+	
+	div.group a {color:#003000;}
+	div.group a:hover {color:white;}
+	div.group {margin-left:1em;margin-right:1em;}
+	
+	div.stuff img{border:2px solid black;}
+ 	p.desc {color:white; padding: 2px 100px 20px 5px; margin:0px 0px 0px 0;}
+
+	h3{font-size: 18px; margin: 10px 0 10px 0;}
+	
+	div.project {
+    margin-bottom:1em;
+  }
+
+  h4 {
+    font-size: inherit;
+    margin:0px;
+    margin-bottom:0.3em;
+    font-weight: normal;
+  }
+
+  h4 span.name {
+    font-weight: bold;
+  }
+  
+  div.menu {
+    width: 14em;
+  }
+  
+  div#main {
+    width: 40em;
+  }
+  
+  .links {
+    margin: 7px 7px 7px 10px;
+  }
+  
+  ul.links {
+    list-style-type: none;
+  }
+  
+  .links li {
+    margin-bottom: 5px;
+  }
+  
+  .links a {color: white; font-weight: bold; font-size: 16px; background-color:#cd3738; margin:6px 6px 6px 0px;}
+  .links a:active{color: white; font-weight: bold; font-size: 16px; background-color:#cd3738;}
+  .links a:visited {color: white; font-weight: bold; font-size: 16px; background-color:#cd3738;}
+  .links a:hover{color: black; font-weight: bold; font-size: 16px; background-color:#cd3738;}
+  

@@ -49,7 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   map.admin '/groups/admin/:id', :controller => 'groups', :action => 'admin'
   map.feed '/groups/feed/:id/page/:page', :controller => 'groups', :action => 'feed'
 
-  map.root :controller => 'groups', :action => 'show', :id => 1
+  map.root :controller => 'groups', :action => 'index'
 
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action.:format'

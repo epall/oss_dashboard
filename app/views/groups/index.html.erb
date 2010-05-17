@@ -1,2 +1,53 @@
-<h1>Group#index</h1>
-<p>Find me in app/views/group/index.html.erb</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html>
+
+<head>
+  <title>RPI Center for Open Source Software</title>
+  <%= stylesheet_link_tag "rcos" %>
+</head>
+
+<body>
+  <div id='header'>
+    <%= image_tag("rpi.jpg", :alt=>"RPI logo", :style => "float:left") %>
+    <%= image_tag("opensource.jpg", :alt=>"Open Source Logo", :style => "float:right") %>
+    <h1>Rensselaer Center for Open Source Software</h1>
+  </div>
+
+  <div class='content'>
+    <div class='menu'>
+      <ul class='links'>
+        <li><%= link_to 'Dashboard', :action => :dashboard, :id => @groups.first %></li>
+        <li><a href="http://rcos.rpi.edu/">Past projects</a></li>
+        <li><a href="http://rcos.rpi.edu/donor.html">Donor</a></li>
+        <li><a href="http://rcos.rpi.edu/students.html">Students</a></li>
+        <li><a href="http://public.kitware.com/OpenSourceSoftwarePractice/index.php/Fall2009/Main_Page"> Courses</a></li>
+        <li><a href="http://www.cs.rpi.edu/~moorthy/rcos/talksfall2009"> Talks  </a></li>
+        <li><a href="http://rcos.rpi.edu/competition.html"> Programming Competition</a></li>
+        <li><a href="http://rcos.rpi.edu/Achievements.html"> Achievements</a></li>
+        <li><a href="http://rcos.rpi.edu/URP_Application.pdf"> URP Application </a></li>
+        <li><a href="http://rcos.rpi.edu/contacts.html"> Contacts </a></li>
+      </ul>
+    </div>
+    
+    <div id='main'>
+      <% @groups.each do |group| -%>
+        <div class='group'>
+          <h3><%= group.name %></h3>
+          <% group.projects.approved.alphabetical.each do |project| %>
+            <div class="project">
+              <h4>
+                <span class="name"><%= link_to project.name, project.website || project.blog %></span>,
+                by <%= project.formatted_contributors %>
+              </h4>
+              <p><%= project.description %></p>
+            </div>
+          <% end %>
+          <% unless group == @groups.last %><hr><% end %>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</body>
+</html>

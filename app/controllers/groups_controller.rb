@@ -1,15 +1,10 @@
 class GroupsController < ApplicationController
   caches_page :dashboard, :feed
   caches_action :show # action caching to separate by subdomain
-  layout 'application', :except => [:show]
+  layout 'application', :except => [:show, :index]
   
   def index
-    # TODO actually support listing of groups
-    if Group.count.zero?
-      redirect_to :action => :new
-    else
-      redirect_to :action => :dashboard, :id => Group.last.id
-    end
+    @groups = Group.all(:order => "created_at DESC")
   end
   
   def show
