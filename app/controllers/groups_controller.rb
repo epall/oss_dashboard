@@ -5,18 +5,20 @@ class GroupsController < ApplicationController
   
   def index
     @groups = Group.all(:order => "created_at DESC")
+
+    if request.host == 'dashboard.rcos.cs.rpi.edu'
+      dashboard # setup template parameters
+      render :action => :dashboard, :id => @groups.first, :layout => 'application'
+    else
+      render
+    end
   end
   
   def show
-    if request.host == 'dashboard.rcos.cs.rpi.edu'
-      dashboard # setup template parameters
-      render :action => :dashboard, :layout => 'application'
-    else
-      @group = Group.find(params[:id], :include => [:projects])
-      respond_to do |format|
-        format.html
-        format.json { render :json => @group }
-      end
+    @group = Group.find(params[:id], :include => [:projects])
+    respond_to do |format|
+      format.html
+      format.json { render :json => @group }
     end
   end
   
