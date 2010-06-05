@@ -281,3 +281,9 @@ hr {
   font-family: monospace;
 	text-align: left;
 }
+
+.pass {
+  text-decoration: underline;
+  font-weight: bold
+}
+

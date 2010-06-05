@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  layout 'application', :except => [:new, :create]
+  layout 'application', :except => [:new]
 
   def create
     @project = Project.new(params[:project])

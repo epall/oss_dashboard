@@ -1,10 +1,10 @@
-<h1>Project created</h1>
+<% @title = "Project created" %>
 <p>Your project, <%= @project.name %>, has been successfully created.
-  It will show up on the <%= link_to 'main page', showgroup_url(@project.group) %> once it has 
+  It will show up on the <%= link_to 'main page', root_url %> once it has 
   been approved by the administrator.</p>
   
 <p>The password for your project is <span class="pass"><%= @project.password %></span>.
   Keep this in a safe place, as it is required for updating project attributes later on.</p>
 
-<%= link_to 'Home', showgroup_url(@project.group) %>
+<%= link_to 'Home', root_url %>
 
