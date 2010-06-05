@@ -23,7 +23,11 @@ module ProjectHelper
       last_update = project.last_update('source_code')
       "<div class=\"title\"><a href=\"#{project.source_code}\">#{text}</a></div><div class=\"time\">#{last_update}</div>"
     else
-      "<a href=\"#{project.source_code}\">Yes</a>"
+      if project.source_code
+        "<a href=\"#{project.source_code}\">Yes</a>"
+      else
+        "Not available"
+      end
     end
   end
 
