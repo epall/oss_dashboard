@@ -6,12 +6,12 @@
   <div class="article">
 	<h3><%= link_to event.title, event.permalink %></h3>
     <div class="post_summary">
-      <%= event.summary || event.content %>
-	  <div class="post_readmore">
-		Read more at
-		<%= link_to event.event_producer.name, event.permalink %> •
-		<%= link_to "RCOS Dashboard", :controller => :events, :action => :full, :id => event %>
-	  </div>
+      <%= sanitize(event.summary || event.content) %>
+      <div class="post_readmore">
+      Read more at
+      <%= link_to event.event_producer.name, event.permalink %> •
+      <%= link_to "RCOS Dashboard", :controller => :events, :action => :full, :id => event %>
+      </div>
     </div>
     <div class="post_details">
       <div class="post_datestamp">
