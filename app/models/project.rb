@@ -188,7 +188,7 @@ class Project < ActiveRecord::Base
 
   def entry_age(entry)
     published = entry.created_at rescue nil
-    return 100 unless published
+    return 365 unless published
 
     age = Time.now - published
     days_old = (age / (60 * 60 * 24))
