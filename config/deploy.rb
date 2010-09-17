@@ -3,7 +3,7 @@ set :deploy_to, "/usr/local/www/rcos_dashboard"
 
 set :scm, :git
 set :repository, "git://github.com/epall/oss_dashboard.git"
-set :branch, "rcos"
+set :branch, "master"
 set :deploy_via, :remote_cache
 
 set :user, 'epall'
