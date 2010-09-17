@@ -1,0 +1,13 @@
+<% @title = @project.name %>
+
+<h2>Warning!</h2>
+<p>You are about to delete this project, and all relating posts.  Continue?</p>
+
+<% form_for @project, :url => {:action => :delete, :id => @project.id} do |f| %>
+  <p>
+  <%= label_tag 'password', 'Password:' %>
+  <%= text_field_tag 'password' %>
+  </p>
+
+  <%= f.submit 'Delete Project' %>
+<% end %>

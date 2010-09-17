@@ -48,3 +48,6 @@
 
   <%= f.submit 'Save' %>
 <% end %>
+
+<br /><br />
+<%= link_to('Delete this project', :controller => :projects, :action => :delete_confirm, :id => @project.id) %>

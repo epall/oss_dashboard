@@ -29,6 +29,36 @@ class ProjectsController < ApplicationController
     redirect_to :controller => 'groups', :action => 'show', :id => @project.group
   end
 
+  ## Page that allows user to confirm deletion of their project
+  def delete_confirm
+    @project = Project.find(params[:id])
+  end
+
+  ## Actual deletion of a project
+  def delete
+    @project = Project.find(params[:id])
+    session[:admin_for_groups] ||= []
+    if @project.group.admin_password == params[:password]
+      session[:admin_for_groups] << @project.group.id
+    end
+
+    unless session[:admin_for_groups].include?(@project.group.id) or @project.password == params[:password]
+      flash[:notice] = "Incorrect password"
+      redirect_to :back
+      return
+    end
+
+    group = @project.group
+
+
+    ## Delete project
+    @project.destroy()
+
+    expire_dynamic_pages(group)
+
+    redirect_to :controller => 'groups', :action => 'show', :id => group
+  end
+
   def approve
     @project = Project.find(params[:id], :include => [:group])
     if request.method == :post

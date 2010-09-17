@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  has_many :events, :as => :event_producer
+  has_many :events, :as => :event_producer, :dependent => :delete_all
   belongs_to :group
   
   named_scope :approved, :conditions => {:approved => true}
